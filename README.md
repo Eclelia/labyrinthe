@@ -1,2 +1,2 @@
-# labyrinthe
-A labyrinthe project in C
+# Labyrinth
+A labyrinth project in C
