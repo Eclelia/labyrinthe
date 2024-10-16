@@ -1,10 +1,10 @@
 CFLAGS = -Wall -Wextra -std=c99 -pedantic
 CPPFLAGS = -I ./include/
-BIN_F = ./bin
+BIN_F = ./obj
 
 all: labyrinth test_labyrinth
 
-labyrinth: $(BIN_F)/main.o $(BIN_F)/labyrinth_creation.o
+labyrinth: $(BIN_F)/main.o $(BIN_F)/labyrinth_creation.o $(BIN_F)/display.o $(BIN_F)/labyrinth.o
 	gcc $^ -o $@ -lm
 
 test_labyrinth: $(BIN_F)/test_labyrinth.o
@@ -13,7 +13,10 @@ test_labyrinth: $(BIN_F)/test_labyrinth.o
 $(BIN_F)/test_labyrinth.o: src/test/test_labyrinth.c
 	gcc $(CFLAGS) $(CPPFLAGS) $< -c -o $@
 
-$(BIN_F)/%.o: src/%.c
+$(BIN_F)/main.o: src/main.c
+	gcc $(CFLAGS) $(CPPFLAGS) $< -c -o $@
+
+$(BIN_F)/%.o: src/%.c include/%.h
 	gcc $(CFLAGS) $(CPPFLAGS) $< -c -o $@
 
 clean :

@@ -1,16 +1,8 @@
-#define LARGEUR 11;
-#define LONGUEUR 25;
-
-struct Labyrinth{
-    char* game;
-    int largeur;
-    int longueur;
-}; 
-typedef struct Labyrinth Labyrinth;
+#ifndef LABYRINTH_CREATION_H
+#define LABYRINTH_CREATION_H
+#include "labyrinth.h"
 
 Labyrinth* init_labyrinth(int largeur, int longueur);
-
-char get_cell(Labyrinth game, int i, int j);
 
 void init_unformed_labyrinth(Labyrinth* labyrinth);
 
@@ -24,3 +16,4 @@ int unify_room_number(Labyrinth*, int number_to_place, int number_to_replace);
 
 int make_labyrinth_playable(Labyrinth* labyrinth);
 
+#endif
