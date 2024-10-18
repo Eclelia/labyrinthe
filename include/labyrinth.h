@@ -13,6 +13,6 @@ typedef struct Labyrinth Labyrinth;
 
 int get_cell(Labyrinth lab, int i, int j);
 
-void set_cell_value(Labyrinth* lab, int i, int j, int value);
+void set_cell(Labyrinth* lab, int i, int j, int value);
 
 #endif
