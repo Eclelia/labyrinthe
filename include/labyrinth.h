@@ -10,9 +10,13 @@ struct Labyrinth{
 }; 
 typedef struct Labyrinth Labyrinth;
 
+typedef struct Labyrinth_cell{
+    int row;
+    int column;
+} Lab_cell;
 
 int get_cell(Labyrinth lab, int i, int j);
 
-void set_cell(Labyrinth* lab, int i, int j, int value);
+int set_cell(Labyrinth* lab, int i, int j, int value);
 
 #endif

@@ -3,11 +3,16 @@
 #include <stdio.h>
 
 int get_cell(Labyrinth lab, int i, int j){
-    //check que i et j soient dedans
-    return lab.game[i*lab.largeur+j];
+    if (i >= 0 && i < lab.longueur && j >= 0 && j < lab.largeur){
+        return lab.game[i*lab.largeur+j];
+    }
+    return -10; //TODO faire define pour pas de val magique
 }
 
-void set_cell(Labyrinth* lab, int i, int j, int value){
-    //check que i et j soient dedans
-    lab->game[(i*lab->largeur)+j] = value;
+int set_cell(Labyrinth* lab, int i, int j, int value){
+    if (i >= 0 && i < lab->longueur && j >= 0 && j < lab->largeur){
+        lab->game[i*lab->largeur+j] = value;
+        return 0;
+    }
+    return -1;
 }
