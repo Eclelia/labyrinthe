@@ -1,3 +1,4 @@
 *.o
 labyrinth
 test_labyrinth
+*x*

@@ -15,6 +15,12 @@ typedef struct Labyrinth_cell{
     int column;
 } Lab_cell;
 
+typedef enum{
+    UNDEFINED = -10,
+    WALL = 0,
+    PLAYER = -1,
+} CellType;
+
 int get_cell(Labyrinth lab, int i, int j);
 
 int set_cell(Labyrinth* lab, int i, int j, int value);

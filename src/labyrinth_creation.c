@@ -5,20 +5,20 @@
 #include "labyrinth.h"
 #include "display.h"
 
-Labyrinth* init_labyrinth(int largeur, int longueur){
+Labyrinth* init_labyrinth(int row, int column){
     //TODO check if i and j is odd
     srand(time(NULL));
     Labyrinth* new_lab = malloc(sizeof(Labyrinth));
-    new_lab->largeur = largeur;
-    new_lab->longueur = longueur;
-    new_lab->game = malloc(largeur*longueur*sizeof(int));
+    new_lab->largeur = column;
+    new_lab->longueur = row;
+    new_lab->game = malloc(column*row*sizeof(int));
     return new_lab;
 }
 
 void init_unformed_labyrinth(Labyrinth* labyrinth){
     int id = 1;
 
-    for(int i = 0; i < (labyrinth->longueur); i++){
+    for(int i = 0; i < labyrinth->longueur; i++){
         for(int j = 0; j < labyrinth->largeur; j++){
             if(i%2 == 1 && j%2 == 1){
                 set_cell(labyrinth, i, j, id);
@@ -65,7 +65,6 @@ void create_labyrinth_path(Labyrinth* labyrinth){
     make_labyrinth_playable(labyrinth);
 }
 
-
 void init_create_recursive_labyrinth_path(Labyrinth* labyrinth){
     int random_row;
     int random_column;
@@ -110,10 +109,14 @@ int get_possible_neighbours(Labyrinth labyrinth, int current_row, int current_co
         neighbours[nb_of_neighbour] = *bottom_cell;
         nb_of_neighbour++;
     }
+    free(top_cell);
+    free(bottom_cell);
+    free(left_cell);
+    free(right_cell);
+
     shuffle_neighbours(neighbours, nb_of_neighbour);
     return nb_of_neighbour;
 }
-
 
 void create_recursive_labyrinth_path(Labyrinth* labyrinth, int current_row, int current_column){
     int cell_value = get_cell(*labyrinth, current_row, current_column);
@@ -131,12 +134,10 @@ void create_recursive_labyrinth_path(Labyrinth* labyrinth, int current_row, int 
             int wall_column = (neighbours[direction].column + current_column)/2;
             set_cell(labyrinth, wall_row, wall_column, cell_value);
 
-            //TODO display_with_green_bloc
+            //display_game_with_player(*labyrinth, wall_column, wall_row, 1);
 
             //donner la nouvelle case à cell_value
             create_recursive_labyrinth_path(labyrinth, neighbours[direction].row, neighbours[direction].column);
-
-            //TODO free les lab_cell
         }
     }
     return; 
