@@ -3,6 +3,10 @@
 #include "labyrinth.h"
 
 #define NAME_SIZE 255 //UNIX max authorized size for filename
+#define DEFAULT_SCORE 1000 
+#define BONUS 50
+#define MALUS -50
+#define MOVING_COST 10
 
 typedef enum{
     MENU,

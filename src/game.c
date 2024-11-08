@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <ncurses.h>
 
 void handle_game(){
     int menu_choice = 0;
@@ -24,6 +25,7 @@ void handle_game(){
             //Charger lab enregistré
             printf("charger\n");
             loaded_lab = load_lab(); //TODO proposer une liste des lab enregistré (les *.cfg)
+            //TODO message erreur quand fichier demandé n'existe pas
             display_game_square(*loaded_lab);
         }
         else if(menu_choice == PLAY){
@@ -33,10 +35,57 @@ void handle_game(){
                 printf("Veuillez charger un labyrinth d'abbord\n");
             }
             else{
-                printf("jeu\n");
-                //display lab with player
-                //listen to input with ncurses
-                //check collision + déplacer joueur
+                printf("jeu\n"); //TODO refactor en plusieurs plus petite méthode
+                //initial player position
+                //TODO write "get player position" function
+                int player_row = 0;
+                int player_column = 1;
+                //WINDOW *win = NULL;
+
+                initscr();
+                keypad(stdscr, TRUE);
+                noecho();
+                //nodelay(stdscr, TRUE);
+                curs_set(0);
+
+                int ch = 'z';
+                do {
+                    int next_x = player_column;
+                    int next_y = player_row;
+
+                    switch (ch) {
+                        case 'z': next_y--; break; // Haut
+                        case 's': next_y++; break; // Bas
+                        case 'q': next_x--; break; // Gauche
+                        case 'd': next_x++; break; // Droite
+                    }
+
+                    //TODO check les autres collisions (switch ?)
+                    int next_cell = get_cell(*loaded_lab, next_y, next_x);  
+                    if (next_cell != WALL && next_cell != UNDEFINED) { //can move
+                        player_row = next_y;
+                        player_column = next_x;
+                        //on bouge donc score perdu
+
+                        //get si monstre -> score perdu
+                        //si piège -> score perdu
+                        //si bonus -> score gagné
+                    }
+                    //display lab with player
+                    ncurses_display_game_with_player(*loaded_lab, player_column, player_row);
+
+                    if(next_cell == EXIT){
+                        /*win = newwin(4, 17, 2, 10);
+                        box(win, 0, 0);
+                        mvwprintw(win, 0, 1, "You won");
+                        mvwprintw(win, 1, 1, "You won : score %d", 12);
+                        wrefresh(win);*/
+                        clear();
+                        mvprintw(0,0,"Vous avez gagné. Veuillez appuyer sur ESC pour continuer");
+                    }
+                } while ((ch = getch()) != 27); // 27 is the escape char, to quit the game 
+                endwin(); 
+                //free(win);
             }
         }        
     }while (menu_choice != QUIT);

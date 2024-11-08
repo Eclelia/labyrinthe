@@ -134,8 +134,6 @@ void create_recursive_labyrinth_path(Labyrinth* labyrinth, int current_row, int 
             int wall_column = (neighbours[direction].column + current_column)/2;
             set_cell(labyrinth, wall_row, wall_column, cell_value);
 
-            //display_game_with_player(*labyrinth, wall_column, wall_row, 1);
-
             //donner la nouvelle case à cell_value
             create_recursive_labyrinth_path(labyrinth, neighbours[direction].row, neighbours[direction].column);
         }
@@ -143,11 +141,8 @@ void create_recursive_labyrinth_path(Labyrinth* labyrinth, int current_row, int 
     return; 
 }
 
-int is_cell_not_visited(int cell_value, int* neighbours){
-    return (neighbours[0] != cell_value || neighbours[1] != cell_value || neighbours[2] != cell_value || neighbours[3] != cell_value);
-}
 
-// (Fisher-Yates) algorithm
+//Fisher-Yates algorithm
 void shuffle_neighbours(Lab_cell* neighbours, int size) {
     for (int i = size - 1; i > 0; i--) {
         int j = rand() % (i + 1);
@@ -187,8 +182,8 @@ void unify_room_number(Labyrinth* labyrinth, int number_to_place, int number_to_
 }
 
 int make_labyrinth_playable(Labyrinth* labyrinth){
-    set_cell(labyrinth, 0, 1, -1); //adds player
-    set_cell(labyrinth, labyrinth->longueur -1 , labyrinth->largeur - 2, -2); //adds exit
+    set_cell(labyrinth, 0, 1, PLAYER);
+    set_cell(labyrinth, labyrinth->longueur -1 , labyrinth->largeur - 2, EXIT);
     return 0;
 }
 

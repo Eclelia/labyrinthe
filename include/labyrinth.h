@@ -19,6 +19,8 @@ typedef enum{
     UNDEFINED = -10,
     WALL = 0,
     PLAYER = -1,
+    EXIT = -2,
+    CLOSED_EXIT = -3,
 } CellType;
 
 int get_cell(Labyrinth lab, int i, int j);
