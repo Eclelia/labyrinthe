@@ -9,6 +9,14 @@
 #define MOVING_COST 10
 
 typedef enum{
+    UP = 'z',
+    DOWN = 's',
+    LEFT = 'q',
+    RIGHT = 'd',
+    ESCAPE = 27,
+} Movement;
+
+typedef enum{
     MENU,
     CREATE,
     LOAD,
@@ -19,7 +27,7 @@ typedef enum{
 //affiche menu principale + appelle fonction liée aux options
 void handle_game();
 
-void create_and_save();
+Labyrinth* create_and_save();
 
 void ask_lab_size(int* row, int* column);
 
@@ -28,5 +36,7 @@ void ask_lab_name(int size, char name[size]);
 Labyrinth* load_lab();
 
 Labyrinth* load_from_file(const char* filename);
+
+int play_labyrinth(Labyrinth* loaded_lab);
 
 #endif

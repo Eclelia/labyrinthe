@@ -1,3 +1,5 @@
+#define _DEFAULT_SOURCE //needed for usleep to be imported correctly
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -12,11 +14,14 @@ void display_game(Labyrinth lab){
             if(cell_value > 0){ //if not a wall
                 printf("%2d ", cell_value);
             }
-            else if(cell_value == -1){ // the player
+            else if(cell_value == PLAYER){ // the player
                 printf(" o ");
             } 
-            else if(cell_value == -2){ // the exit
+            else if(cell_value == EXIT){ // the exit
                 printf("   ");
+            }
+            else if(cell_value == CLOSED_EXIT){ // the exit
+                printf(" x ");
             } 
             else{
                 printf(" # ");
@@ -31,14 +36,17 @@ void display_game_square(Labyrinth lab){
     for(int i = 0; i < lab.longueur; i++){
         for (int j = 0; j < lab.largeur; j++){ 
             int cell_value = get_cell(lab, i, j);
-            if(cell_value > 0){ //if not a wall
+            if(cell_value > WALL){ //if not a wall
                 printf("   ");
             }
-            else if(cell_value == -1){ // the player
+            else if(cell_value == PLAYER){ // the player
                 printf(" o ");
             } 
-            else if(cell_value == -2){ // the exit
+            else if(cell_value == EXIT){ // the exit
                 printf("   ");
+            } 
+            else if(cell_value == CLOSED_EXIT){ // the exit
+                printf(" x ");
             } 
             else{
                 printf(WHITE_HIGHLIGHT "   " ENDCOLOR);
@@ -55,14 +63,17 @@ void display_game_with_player(Labyrinth lab, int column, int row, int wait){
             if(i == row && j == column){
                 printf(BLUE_HIGHLIGHT "   " ENDCOLOR);
             }
-            else if(cell_value > 0){ //if not a wall
+            else if(cell_value > WALL){ //if not a wall
                 printf("   ");
             }
-            else if(cell_value == -1){ // the player
+            else if(cell_value == PLAYER){ // the player
                 printf(" o ");
             } 
-            else if(cell_value == -2){ // the exit
+            else if(cell_value == EXIT){ // the exit
                 printf("   ");
+            } 
+            else if(cell_value == CLOSED_EXIT){ // the exit
+                printf("xxx");
             } 
             else{
                 printf(WHITE_HIGHLIGHT "   " ENDCOLOR);
@@ -71,7 +82,7 @@ void display_game_with_player(Labyrinth lab, int column, int row, int wait){
         printf("\n");   
     }
     if(wait){
-        usleep(3000); //TODO resoudre l'erreur de compil
+        usleep(30000);
     }
     system("clear");
 }

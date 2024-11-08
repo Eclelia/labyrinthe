@@ -134,6 +134,8 @@ void create_recursive_labyrinth_path(Labyrinth* labyrinth, int current_row, int 
             int wall_column = (neighbours[direction].column + current_column)/2;
             set_cell(labyrinth, wall_row, wall_column, cell_value);
 
+            display_game_with_player(*labyrinth, wall_column, wall_row, 1);
+
             //donner la nouvelle case à cell_value
             create_recursive_labyrinth_path(labyrinth, neighbours[direction].row, neighbours[direction].column);
         }

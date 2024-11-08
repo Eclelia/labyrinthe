@@ -16,76 +16,23 @@ void handle_game(){
         while (getchar() != '\n');
 
         if(menu_choice == CREATE){
-            //créer un labyrith (avec ou sans affichage)
-            printf("creation\n");
-            create_and_save();
-            //TODO load automatique le labyrinth qui vient d'être créé
+            loaded_lab = create_and_save();
         }
         else if(menu_choice == LOAD){
-            //Charger lab enregistré
-            printf("charger\n");
             loaded_lab = load_lab(); //TODO proposer une liste des lab enregistré (les *.cfg)
-            //TODO message erreur quand fichier demandé n'existe pas
-            display_game_square(*loaded_lab);
-        }
-        else if(menu_choice == PLAY){
-            //Jouer
-            printf("jouer\n");
             if(loaded_lab == NULL){
-                printf("Veuillez charger un labyrinth d'abbord\n");
+                printf("Fichier non trouvé\n");
             }
             else{
-                printf("jeu\n"); //TODO refactor en plusieurs plus petite méthode
-                //initial player position
-                //TODO write "get player position" function
-                int player_row = 0;
-                int player_column = 1;
-                //WINDOW *win = NULL;
-
-                initscr();
-                keypad(stdscr, TRUE);
-                noecho();
-                //nodelay(stdscr, TRUE);
-                curs_set(0);
-
-                int ch = 'z';
-                do {
-                    int next_x = player_column;
-                    int next_y = player_row;
-
-                    switch (ch) {
-                        case 'z': next_y--; break; // Haut
-                        case 's': next_y++; break; // Bas
-                        case 'q': next_x--; break; // Gauche
-                        case 'd': next_x++; break; // Droite
-                    }
-
-                    //TODO check les autres collisions (switch ?)
-                    int next_cell = get_cell(*loaded_lab, next_y, next_x);  
-                    if (next_cell != WALL && next_cell != UNDEFINED) { //can move
-                        player_row = next_y;
-                        player_column = next_x;
-                        //on bouge donc score perdu
-
-                        //get si monstre -> score perdu
-                        //si piège -> score perdu
-                        //si bonus -> score gagné
-                    }
-                    //display lab with player
-                    ncurses_display_game_with_player(*loaded_lab, player_column, player_row);
-
-                    if(next_cell == EXIT){
-                        /*win = newwin(4, 17, 2, 10);
-                        box(win, 0, 0);
-                        mvwprintw(win, 0, 1, "You won");
-                        mvwprintw(win, 1, 1, "You won : score %d", 12);
-                        wrefresh(win);*/
-                        clear();
-                        mvprintw(0,0,"Vous avez gagné. Veuillez appuyer sur ESC pour continuer");
-                    }
-                } while ((ch = getch()) != 27); // 27 is the escape char, to quit the game 
-                endwin(); 
-                //free(win);
+                display_game_square(*loaded_lab);
+            }
+        }
+        else if(menu_choice == PLAY){
+            if(loaded_lab == NULL){
+                printf("Veuillez d'abord charger un labyrinthe\n");
+            }
+            else{
+                play_labyrinth(loaded_lab);
             }
         }        
     }while (menu_choice != QUIT);
@@ -93,7 +40,7 @@ void handle_game(){
 }
 
 void save_into_file(Labyrinth lab, const char* filename){ //TODO mettre dans le bon fichier .c
-    FILE * file = fopen(filename, "w"); //TODO ajouter le .cfg ?
+    FILE * file = fopen(filename, "w"); //TODO ajouter le .cfg
 
     fprintf(file, "%d %d\n", lab.longueur, lab.largeur);
     fprintf(file, "%s\n", filename);
@@ -120,6 +67,8 @@ Labyrinth* load_from_file(const char* filename){ //TODO mettre dans le bon fichi
     char nom[NAME_SIZE];
     int value;
 
+    if(file == NULL)return NULL;
+
     fscanf(file, "%d %d\n", &longueur, &largeur);
     Labyrinth* lab = init_labyrinth(longueur, largeur);
 
@@ -135,13 +84,12 @@ Labyrinth* load_from_file(const char* filename){ //TODO mettre dans le bon fichi
     return lab;
 }
 
-void create_and_save(){
+Labyrinth* create_and_save(){
     int row;
     int column;
     char name[NAME_SIZE];
 
     ask_lab_size(&row, &column);
-    printf("row : %d, column : %d", row, column);
     ask_lab_name(NAME_SIZE, name);
 
     Labyrinth* lab = init_labyrinth(row, column);
@@ -152,8 +100,8 @@ void create_and_save(){
     save_into_file(*lab, name);
 
     display_game_square(*lab); 
-    
-    destroy_labyrinth(lab);
+
+    return lab;
 }
 
 void ask_lab_size(int* row, int* column){
@@ -179,10 +127,56 @@ void ask_lab_name(int size, char name[size]){
     int entreeValide = 0;
     while(!entreeValide){
         printf("\033[0;35mNom du labyrinth : \033[0;37m");
-        //TODO demander le nom proprement
         scanf("%s", name);
         while ((getchar()) != '\n'); //vider le buffer
         entreeValide = (int)strlen(name) > 0 && (int)strlen(name) < size ? 1 : 0;
         if(!entreeValide) printf("\033[0;37mEntrée invalide (doit être impair)\033[0;31m\n");
     }
+}
+
+int play_labyrinth(Labyrinth* loaded_lab){
+    //TODO init src en dehors de la methode pour message de réussite dans une window
+    //TODO refactor en plusieurs plus petite méthode
+    //initial player position
+    //TODO write "get player position" function
+    int player_row = 0;
+    int player_column = 1;
+
+    initscr();
+    keypad(stdscr, TRUE);
+    noecho();
+    curs_set(0);
+
+    int ch = UP;
+    do {
+        int next_x = player_column;
+        int next_y = player_row;
+
+        switch (ch) {
+            case UP: next_y--; break;
+            case DOWN: next_y++; break;
+            case LEFT: next_x--; break;
+            case RIGHT: next_x++; break;
+        }
+
+        //TODO check les autres collisions (switch ?)
+        int next_cell = get_cell(*loaded_lab, next_y, next_x);  
+        if (next_cell != WALL && next_cell != UNDEFINED) { //can move
+            player_row = next_y;
+            player_column = next_x;
+            //on bouge donc score perdu
+
+            //get si monstre -> score perdu
+            //si piège -> score perdu
+            //si bonus -> score gagné
+        }
+        ncurses_display_game_with_player(*loaded_lab, player_column, player_row);
+
+        if(next_cell == EXIT){
+            clear();
+            mvprintw(0,0,"Vous avez gagné. Veuillez appuyer sur ESC pour continuer"); //TODO empêcher le joueur de remonter (flag ?)
+        }
+    } while ((ch = getch()) != ESCAPE); 
+    endwin();
+    return 1;
 }

@@ -5,8 +5,8 @@
 
 struct Labyrinth{
     int* game;
-    int largeur;
-    int longueur;
+    int largeur; //TODO refacto les largeur en column
+    int longueur; //TODO refacto les longueur en row
 }; 
 typedef struct Labyrinth Labyrinth;
 
