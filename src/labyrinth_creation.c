@@ -6,8 +6,10 @@
 #include "display.h"
 
 Labyrinth* init_labyrinth(int row, int column){
-    //TODO check if i and j is odd
     srand(time(NULL));
+    if(row%2 == 0 || column%2 == 0){
+        return NULL;
+    }
     Labyrinth* new_lab = malloc(sizeof(Labyrinth));
     new_lab->largeur = column;
     new_lab->longueur = row;
@@ -73,6 +75,7 @@ void init_create_recursive_labyrinth_path(Labyrinth* labyrinth){
     create_recursive_labyrinth_path(labyrinth, random_row, random_column);
 
     make_labyrinth_playable(labyrinth);
+    add_score_mecanics(labyrinth, NB_BONUS, NB_TRAP);
 }
 
 Lab_cell* init_lab_cell(Labyrinth lab, int row, int column){
@@ -173,6 +176,13 @@ void pull_random_cell(Labyrinth lab, int* random_row, int* random_column){
     *random_column = (rand() % ((lab.largeur - 1)/2)) *2 +1;
 }
 
+void pull_random_empty_cell(Labyrinth lab, int* random_row, int* random_column){
+    do{
+        *random_row = (rand() % ((lab.longueur - 1)/2)) *2 +1; //TODO changer la formule pour que ça soit n'imp quelle cellule
+        *random_column = (rand() % ((lab.largeur - 1)/2)) *2 +1;
+    }while(get_cell(lab, *random_row, *random_column) == WALL);
+}
+
 void unify_room_number(Labyrinth* labyrinth, int number_to_place, int number_to_replace){
     for(int i = 0; i < (labyrinth->longueur); i++){
         for(int j = 0; j < labyrinth->largeur; j++){
@@ -187,6 +197,41 @@ int make_labyrinth_playable(Labyrinth* labyrinth){
     set_cell(labyrinth, 0, 1, PLAYER);
     set_cell(labyrinth, labyrinth->longueur -1 , labyrinth->largeur - 2, EXIT);
     return 0;
+}
+
+void add_score_mecanics(Labyrinth* labyrinth, int nb_bonus, int nb_trap){
+    add_key_and_lock_door(labyrinth);
+    add_objects(labyrinth, nb_trap, TRAP_CELL);
+    add_objects(labyrinth, nb_bonus, BONUS_CELL);
+}
+
+void add_key_and_lock_door(Labyrinth* labyrinth){
+    int random_row, random_column;
+    pull_random_empty_cell(*labyrinth, &random_row, &random_column);
+    set_cell(labyrinth, random_row , random_column, KEY);
+    set_cell(labyrinth, labyrinth->longueur -1 , labyrinth->largeur - 2, CLOSED_EXIT);
+}
+
+void add_objects(Labyrinth* lab, int nb_objet, CellType object_to_place){
+    int placed_objects = 0;
+    int random_row, random_column;
+    while (placed_objects < nb_objet){
+        pull_random_empty_cell(*lab, &random_row, &random_column);
+        placed_objects ++;
+        set_cell(lab, random_row, random_column, object_to_place);
+    }
+}
+
+Labyrinth* copy_labyrinth(Labyrinth labyrinth){
+    Labyrinth* copy = init_labyrinth(labyrinth.longueur, labyrinth.largeur);
+
+    for (int i = 0; i < labyrinth.longueur; i++){
+        for (int j = 0; j < labyrinth.largeur; j++){
+            set_cell(copy, i, j, get_cell(labyrinth, i, j));
+        }
+    }
+
+    return copy;
 }
 
 void destroy_labyrinth(Labyrinth* labyrinth){

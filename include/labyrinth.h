@@ -16,11 +16,17 @@ typedef struct Labyrinth_cell{
 } Lab_cell;
 
 typedef enum{
-    UNDEFINED = -10,
+    PATH = 1,
     WALL = 0,
+    UNDEFINED = -10,
     PLAYER = -1,
     EXIT = -2,
     CLOSED_EXIT = -3,
+    KEY = -4,
+    BONUS_CELL = -5,
+    TRAP_CELL = -6,
+    GHOST = -7,
+    TROLL = -8
 } CellType;
 
 int get_cell(Labyrinth lab, int i, int j);

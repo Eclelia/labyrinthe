@@ -2,6 +2,9 @@
 #define LABYRINTH_CREATION_H
 #include "labyrinth.h"
 
+#define NB_TRAP 4
+#define NB_BONUS 6
+
 Labyrinth* init_labyrinth(int row, int column);
 
 void init_unformed_labyrinth(Labyrinth* labyrinth);
@@ -19,6 +22,14 @@ void pull_breakable_wall(Labyrinth lab, int* random_row, int* random_column);
 void unify_room_number(Labyrinth* labyrinth, int number_to_place, int number_to_replace);
 
 int make_labyrinth_playable(Labyrinth* labyrinth);
+
+void add_score_mecanics(Labyrinth* labyrinth, int nb_bonus, int nb_trap);
+
+void add_key_and_lock_door(Labyrinth* labyrinth);
+
+void add_objects(Labyrinth* labyrinth, int nb_objet, CellType object_to_place);
+
+Labyrinth* copy_labyrinth(Labyrinth labyrinth);
 
 void destroy_labyrinth(Labyrinth* labyrinth);
 

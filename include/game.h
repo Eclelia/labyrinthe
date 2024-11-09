@@ -21,7 +21,8 @@ typedef enum{
     CREATE,
     LOAD,
     PLAY,
-    QUIT
+    LEADERBOARD,
+    QUIT,
 } GameOption;
 
 //affiche menu principale + appelle fonction liée aux options
@@ -37,6 +38,8 @@ Labyrinth* load_lab();
 
 Labyrinth* load_from_file(const char* filename);
 
-int play_labyrinth(Labyrinth* loaded_lab);
+int play_labyrinth(Labyrinth loaded_lab);
+
+int check_collision(Labyrinth* lab, int next_y, int next_x, int* player_row, int* player_column, int* score, int* found_key);
 
 #endif
