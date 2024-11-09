@@ -27,10 +27,11 @@ void save_into_file(Labyrinth lab, const char* filename){
     free(dest);
 }
 
-Labyrinth* load_lab(){
+Labyrinth* load_lab(char* name_out){
     char name[NAME_SIZE];
 
     ask_lab_name(NAME_SIZE, name);
+    strcpy(name_out, name);
     return load_from_file(name);
 }
 

@@ -4,6 +4,7 @@
 #include "leaderboard.h"
 #include "labyrinth_creation.h"
 #include "labyrinth_file_helper.h"
+#include "display.h"
 
 Leaderboard* init_leaderboard(){
     Leaderboard* new_lb = malloc(sizeof(Leaderboard));
@@ -93,6 +94,45 @@ Leaderboard* load_lb_from_file(const char* filename){
 void display_lb(Leaderboard lb){
     printf("-----LEADERBOARD-----\n");
     for(int i = 0; i < lb.nb_of_scores; i++){
-        printf("%d. Joueur : %20s  Score : %d\n", i+1, lb.score_list[i].name, lb.score_list[i].score);
+        printf("%2d. Joueur : %20s  Score : %d\n", i+1, lb.score_list[i].name, lb.score_list[i].score);
     }
 }
+
+int get_lowest_score(Leaderboard lb){
+    return lb.score_list[lb.nb_of_scores - 1].score;
+}
+
+void ask_player_name(int size, char name[size]){
+    int entreeValide = 0;
+    while(!entreeValide){
+        printf("\033[0;35mQuel est votre nom ? \033[0;37m");
+        scanf("%s", name);
+        while ((getchar()) != '\n'); //vider le buffer
+        entreeValide = (int)strlen(name) > 0 && (int)strlen(name) < size ? 1 : 0;
+        if(!entreeValide) printf(RED_HIGHLIGHT "Entrée invalide\n" ENDCOLOR);
+    }
+}
+
+ //(en fonction de nb_of_scores et nb_of_score ++ si inf à 10)
+ void add_player(Leaderboard* lb, const char* filename, const char* name, int score){
+    P_score* p_score = init_player_score(name, score);
+    if(lb->nb_of_scores < LEADERBOARD_SIZE){
+        lb->score_list[lb->nb_of_scores] = *p_score;
+        lb->nb_of_scores++;
+    }
+    else{
+        lb->score_list[LEADERBOARD_SIZE -1] = *p_score;
+    }
+    sort_player(lb);
+    save_leaderboard(*lb, filename);
+ }
+
+ int compare_scores(const void *obj_a, const void *obj_b) {
+    P_score *player_a = (P_score *)obj_a;
+    P_score *player_b = (P_score *)obj_b;
+    return player_b->score - player_a->score;
+}
+
+ void sort_player(Leaderboard* lb){
+    qsort(lb->score_list, lb->nb_of_scores, sizeof(P_score), compare_scores);
+ }

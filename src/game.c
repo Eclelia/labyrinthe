@@ -12,6 +12,7 @@
 void handle_game(){
     int menu_choice = MENU;
     Labyrinth* loaded_lab = NULL;
+    char loaded_lab_name[NAME_SIZE];
     do{
         display_menu();
         scanf("%d", &menu_choice);
@@ -22,7 +23,7 @@ void handle_game(){
             menu_choice = MENU;
         }
         else if(menu_choice == LOAD){
-            loaded_lab = load_lab(); //TODO proposer une liste des lab enregistré (les *.cfg)
+            loaded_lab = load_lab(loaded_lab_name); //TODO proposer une liste des lab enregistré (les *.cfg)
             if(loaded_lab == NULL){
                 printf(RED_HIGHLIGHT "Fichier non trouvé ou corrompu" ENDCOLOR "\n");
             }
@@ -36,7 +37,8 @@ void handle_game(){
                 printf(RED_HIGHLIGHT "Veuillez d'abord charger un labyrinthe" ENDCOLOR "\n");
             }
             else{
-                play_labyrinth(*loaded_lab);
+                //printf("%s\n", loaded_lab_name);
+                play_labyrinth(*loaded_lab, loaded_lab_name);
             }
             menu_choice = MENU;
         }  
@@ -75,7 +77,7 @@ Labyrinth* create_and_save(){
     return lab;
 }
 
-int play_labyrinth(Labyrinth loaded_lab){
+int play_labyrinth(Labyrinth loaded_lab, const char* lab_name){
     Labyrinth* lab_copy = copy_labyrinth(loaded_lab);
     //initial player position //TODO write "get player position" function
     int player_row = 0;
@@ -112,13 +114,25 @@ int play_labyrinth(Labyrinth loaded_lab){
 
     } while ((ch = getch()) != ESCAPE); 
     endwin();
+    system("clear");
+    Leaderboard* lb = load_lb_from_file(lab_name);
+    char name[NAME_SIZE];
+
+    display_lb(*lb);
+
+    if(score > get_lowest_score(*lb)){
+        ask_player_name(NAME_SIZE, name);
+        add_player(lb, lab_name, name, score);
+    }
+    
+
     //TODO check score pour faire le leaderboard (demande prénom + enregistrer dans fichier)
     return 1;
 }
 
 int check_collision(Labyrinth* lab, int next_y, int next_x, int* player_row, int* player_column, int* score, int* found_key){ //TODO struct game_state ?
     int next_cell = get_cell(*lab, next_y, next_x);  
-    if (next_cell != WALL && next_cell != UNDEFINED && !(next_cell == EXIT && !*found_key)) { //can move
+    if (next_cell != WALL && next_cell != UNDEFINED && next_cell != CLOSED_EXIT) { //can move
         *player_row = next_y;
         *player_column = next_x;
 

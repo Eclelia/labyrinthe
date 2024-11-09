@@ -15,7 +15,7 @@ int main()
 
     display_game_square(*lab); 
     
-    destroy_labyrinth(lab);*/
+    destroy_labyrinth(lab);
 
     Leaderboard* lb = init_leaderboard();
     P_score* pc = init_player_score("Paul", 3000);
@@ -26,7 +26,7 @@ int main()
     display_lb(*lb);
     save_leaderboard(*lb, "7x7");
     Leaderboard* lb_2 = load_leaderboard("7x7");
-    display_lb(*lb_2);
+    display_lb(*lb_2);*/
 
     handle_game();
 }

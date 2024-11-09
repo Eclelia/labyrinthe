@@ -200,9 +200,9 @@ int make_labyrinth_playable(Labyrinth* labyrinth){
 }
 
 void add_score_mecanics(Labyrinth* labyrinth, int nb_bonus, int nb_trap){
-    add_key_and_lock_door(labyrinth);
     add_objects(labyrinth, nb_trap, TRAP_CELL);
     add_objects(labyrinth, nb_bonus, BONUS_CELL);
+    add_key_and_lock_door(labyrinth);
 }
 
 void add_key_and_lock_door(Labyrinth* labyrinth){

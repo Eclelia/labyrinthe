@@ -10,7 +10,7 @@ void ask_lab_name(int size, char name[size]);
 
 void save_into_file(Labyrinth lab, const char* filename);
 
-Labyrinth* load_lab();
+Labyrinth* load_lab(char* name_out);
 
 Labyrinth* load_from_file(const char* filename);
 

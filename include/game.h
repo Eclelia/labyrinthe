@@ -29,7 +29,7 @@ void handle_game();
 
 Labyrinth* create_and_save();
 
-int play_labyrinth(Labyrinth loaded_lab);
+int play_labyrinth(Labyrinth loaded_lab, const char* lab_name);
 
 int check_collision(Labyrinth* lab, int next_y, int next_x, int* player_row, int* player_column, int* score, int* found_key);
 
