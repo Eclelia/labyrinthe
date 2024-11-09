@@ -7,7 +7,7 @@
 
 Labyrinth* init_labyrinth(int row, int column){
     srand(time(NULL));
-    if(row%2 == 0 || column%2 == 0){
+    if(row%2 == 0 || column%2 == 0 || row < 5 || column < 5){
         return NULL;
     }
     Labyrinth* new_lab = malloc(sizeof(Labyrinth));

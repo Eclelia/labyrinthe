@@ -3,13 +3,14 @@
 #include "labyrinth.h"
 #include "labyrinth_creation.h"
 #include "labyrinth_file_helper.h"
+#include "leaderboard.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <ncurses.h>
 
 void handle_game(){
-    int menu_choice = 0;
+    int menu_choice = MENU;
     Labyrinth* loaded_lab = NULL;
     do{
         display_menu();
@@ -40,7 +41,15 @@ void handle_game(){
             menu_choice = MENU;
         }  
         else if(menu_choice == LEADERBOARD){
-            //(demande quel fichier puis display)
+            Leaderboard* loaded_lb = load_leaderboard();
+            if(loaded_lb == NULL){
+                printf(RED_HIGHLIGHT "Fichier non trouvé ou corrompu" ENDCOLOR "\n");
+            }
+            else{
+                display_lb(*loaded_lb);
+            }
+            menu_choice = MENU;
+            free(loaded_lb);
         }    
     }while (menu_choice != QUIT);
     free(loaded_lab);
