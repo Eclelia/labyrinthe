@@ -4,6 +4,7 @@
 
 #define NB_TRAP 4
 #define NB_BONUS 6
+#define DATA_PATH "data/"
 
 Labyrinth* init_labyrinth(int row, int column);
 

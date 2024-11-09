@@ -1,11 +1,19 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "labyrinth_file_helper.h"
 #include "display.h"
 #include "labyrinth_creation.h"
 
 void save_into_file(Labyrinth lab, const char* filename){
-    FILE * file = fopen(filename, "w"); //TODO ajouter le .cfg
+    size_t total_size = strlen(DATA_PATH) + strlen(filename) + strlen(".cfg") + 1;
+    char* dest = malloc(total_size);
+
+    strcpy(dest, DATA_PATH);
+    strcat(dest, filename);
+    strcat(dest, ".cfg");
+
+    FILE * file = fopen(dest, "w");
 
     fprintf(file, "%d %d\n", lab.longueur, lab.largeur);
     fprintf(file, "%s\n", filename);
@@ -16,6 +24,7 @@ void save_into_file(Labyrinth lab, const char* filename){
         fprintf(file, "\n");
     }
     fclose(file);
+    free(dest);
 }
 
 Labyrinth* load_lab(){
@@ -26,7 +35,14 @@ Labyrinth* load_lab(){
 }
 
 Labyrinth* load_from_file(const char* filename){ //TODO erreur si fichier corrompu
-    FILE * file = fopen(filename, "r");
+    size_t total_size = strlen(DATA_PATH) + strlen(filename) + strlen(".cfg") + 1;
+    char* dest = malloc(total_size);
+
+    strcpy(dest, DATA_PATH);
+    strcat(dest, filename);
+    strcat(dest, ".cfg");
+
+    FILE * file = fopen(dest, "r");
     int longueur;
     int largeur;
     char nom[NAME_SIZE];

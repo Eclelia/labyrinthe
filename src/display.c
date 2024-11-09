@@ -148,7 +148,7 @@ void ncurses_display_game_state(Labyrinth lab, int column, int row, int score){
                 mvprintw(y, x, " E ");
                 attroff(COLOR_PAIR(EXIT_PAIR));
             } 
-            else if(cell_value == EXIT){
+            else if(cell_value == CLOSED_EXIT){
                 attron(COLOR_PAIR(EXIT_PAIR));
                 mvprintw(y, x, "xxx");
                 attroff(COLOR_PAIR(EXIT_PAIR));

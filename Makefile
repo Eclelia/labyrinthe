@@ -1,11 +1,13 @@
 CFLAGS = -Wall -Wextra -std=c99 -pedantic
 CPPFLAGS = -I ./include/
 BIN_F = ./obj
+DATA_DIR = ./data
 
 all: labyrinth test_labyrinth
 
 labyrinth: $(BIN_F)/main.o $(BIN_F)/labyrinth_creation.o $(BIN_F)/display.o $(BIN_F)/labyrinth.o $(BIN_F)/game.o $(BIN_F)/labyrinth_file_helper.o
 #sudo apt-get install libncurses5-dev libncursesw5-dev
+	mkdir -p $(DATA_DIR)
 	gcc $^ -o $@ -lm -lncurses -lc
 
 test_labyrinth: $(BIN_F)/test_labyrinth.o
