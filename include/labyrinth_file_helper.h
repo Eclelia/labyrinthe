@@ -2,9 +2,16 @@
 #define FILE_HELPER_H
 
 #include "labyrinth.h"
-//TODO y mettre les fonctions de save, de load des fichiers de laby et de leaderboard ?
+#define NAME_SIZE 255 //UNIX max authorized size for filename
 
-//void save_labyrinth(Labyrinth lab, const char* filename);
-void ask_name();
+void ask_lab_size(int* row, int* column);
+
+void ask_lab_name(int size, char name[size]);
+
+void save_into_file(Labyrinth lab, const char* filename);
+
+Labyrinth* load_lab();
+
+Labyrinth* load_from_file(const char* filename);
 
 #endif

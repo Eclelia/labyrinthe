@@ -4,7 +4,7 @@ BIN_F = ./obj
 
 all: labyrinth test_labyrinth
 
-labyrinth: $(BIN_F)/main.o $(BIN_F)/labyrinth_creation.o $(BIN_F)/display.o $(BIN_F)/labyrinth.o $(BIN_F)/game.o
+labyrinth: $(BIN_F)/main.o $(BIN_F)/labyrinth_creation.o $(BIN_F)/display.o $(BIN_F)/labyrinth.o $(BIN_F)/game.o $(BIN_F)/labyrinth_file_helper.o
 #sudo apt-get install libncurses5-dev libncursesw5-dev
 	gcc $^ -o $@ -lm -lncurses -lc
 

@@ -181,7 +181,6 @@ void ncurses_display_game_state(Labyrinth lab, int column, int row, int score){
 }
 
 void display_menu(){
-    system("clear");
     printf( BOLD
 ORANGE " _           _                _       _   _     \n"
 ORANGE "| |         | |              (_)     | | | |    \n"
