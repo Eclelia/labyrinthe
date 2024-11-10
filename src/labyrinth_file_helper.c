@@ -23,6 +23,17 @@ void save_into_file(Labyrinth lab, const char* filename){
         }
         fprintf(file, "\n");
     }
+
+    fprintf(file, "%d\n", lab.n_monsters); //TODO tester quand y'a des monstres
+    for (int i = 0; i < lab.n_monsters; i++){
+        Monster monster = lab.monsters[i];
+        fprintf(file, "%d %d %d %d\n", 
+            monster.column, 
+            monster.row, 
+            monster.type, 
+            monster.penalty);
+    }
+
     fclose(file);
     free(dest);
 }
@@ -48,6 +59,7 @@ Labyrinth* load_from_file(const char* filename){ //TODO erreur si fichier corrom
     int largeur;
     char nom[NAME_SIZE];
     int value;
+    int n_monster;
 
     if(file == NULL)return NULL;
 
@@ -63,6 +75,18 @@ Labyrinth* load_from_file(const char* filename){ //TODO erreur si fichier corrom
             fscanf(file, "%d", &value);
             set_cell(lab, i, j, value);
         }
+    }
+
+    fscanf(file, "\n%d\n", &n_monster);
+    lab->n_monsters = n_monster;
+    printf("n_monstre %d\n", lab->n_monsters); //TODO tester quand y'a des monstres
+    lab->monsters = malloc(sizeof(Monster)*lab->n_monsters);
+    for (int i = 0; i < lab->n_monsters; i++){
+        int m_column, m_row, m_type, m_penalty;
+        fscanf(file, "%d %d %d %d\n", 
+            &m_column, &m_row, &m_type, &m_penalty);
+        Monster* mon = create_monster(m_row, m_column, m_type, m_penalty);
+        lab->monsters[i] = *mon;
     }
     fclose(file);
     return lab;
@@ -84,6 +108,18 @@ void ask_lab_size(int* row, int* column){
         while ((getchar()) != '\n'); //vider le buffer
         entreeValide = *column%2 == 1 ? 1 : 0;
         if(!entreeValide) printf(RED_HIGHLIGHT "Entrée invalide (doit être impair)"  ENDCOLOR "\n");
+    }
+}
+
+void ask_difficulty(int* difficulty){
+    int entreeValide = 0;
+    while(!entreeValide){
+        printf("\033[0;35mMode facile (0) ou difficile (1) : \033[0;37m");
+        if(scanf("%i", difficulty) == 1){ //scanf read an int
+            entreeValide =(*difficulty == 0 || *difficulty == 1)? 1 : 0;
+        }
+        while ((getchar()) != '\n'); //vider le buffer
+        if(!entreeValide) printf(RED_HIGHLIGHT "Entrée invalide (Veuillez choisir entre 0 et 1" ENDCOLOR "\n");
     }
 }
 

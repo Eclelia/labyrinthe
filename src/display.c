@@ -27,11 +27,17 @@ void display_game(Labyrinth lab){
                 printf(YELLOW " K " ENDCOLOR);
             }
             else if(cell_value == BONUS_CELL){
-                printf(GREEN_HIGHLIGHT " B " ENDCOLOR);
+                printf(GREEN_HIGHLIGHT " o " ENDCOLOR);
             }
             else if(cell_value == TRAP_CELL){
-                printf(RED_HIGHLIGHT " T " ENDCOLOR);
+                printf(RED_HIGHLIGHT " x " ENDCOLOR);
             }
+            else if(cell_value == GHOST){
+                printf(CYAN DARK_CYAN_HIGHLIGHT "(¨)" ENDCOLOR);
+            } 
+            else if(cell_value == TROLL){
+                printf(ORANGE DARK_RED_HIGHLIGHT "`o´" ENDCOLOR);
+            } 
             else{
                 printf(" # ");
             }
@@ -61,10 +67,16 @@ void display_game_square(Labyrinth lab){
                 printf(YELLOW " K " ENDCOLOR);
             }
             else if(cell_value == BONUS_CELL){
-                printf(GREEN_HIGHLIGHT " B " ENDCOLOR);
+                printf(GREEN_HIGHLIGHT " o " ENDCOLOR);
             }
             else if(cell_value == TRAP_CELL){
-                printf(RED_HIGHLIGHT " T " ENDCOLOR);
+                printf(RED_HIGHLIGHT " x " ENDCOLOR);
+            }
+            else if(cell_value == GHOST){
+                printf(CYAN DARK_CYAN_HIGHLIGHT "(¨)" ENDCOLOR);
+            } 
+            else if(cell_value == TROLL){
+                printf(ORANGE DARK_RED_HIGHLIGHT "`o´" ENDCOLOR);
             } 
             else{
                 printf(WHITE_HIGHLIGHT "   " ENDCOLOR);
@@ -97,10 +109,16 @@ void display_game_with_player(Labyrinth lab, int column, int row, int wait){
                 printf(YELLOW " K " ENDCOLOR);
             }
             else if(cell_value == BONUS_CELL){
-                printf(GREEN_HIGHLIGHT " B " ENDCOLOR);
+                printf(GREEN_HIGHLIGHT " o " ENDCOLOR);
             }
             else if(cell_value == TRAP_CELL){
-                printf(RED_HIGHLIGHT " T " ENDCOLOR);
+                printf(RED_HIGHLIGHT " x " ENDCOLOR);
+            } 
+            else if(cell_value == GHOST){
+                printf(CYAN DARK_CYAN_HIGHLIGHT "(¨)" ENDCOLOR);
+            } 
+            else if(cell_value == TROLL){
+                printf(ORANGE DARK_RED_HIGHLIGHT "`o´" ENDCOLOR);
             } 
             else{
                 printf(WHITE_HIGHLIGHT "   " ENDCOLOR);
@@ -119,13 +137,22 @@ void ncurses_display_game_state(Labyrinth lab, int column, int row, int score){
     use_default_colors();
     start_color();
 
+    init_color(COLOR_RED, 1000, 372, 372);
+    init_color(COLOR_GREEN, 0, 529, 0);
+    init_color(COLOR_ORANGE, 1000, 529, 0);
+    init_color(COLOR_DARK_RED, 372, 0, 0);
+    init_color(COLOR_CYAN, 372, 1000, 686);
+    init_color(COLOR_DARK_CYAN,0, 372, 372);
+
     // Definition of ncurses color pairs
     init_pair(PLAYER_PAIR, COLOR_WHITE, COLOR_BLUE);   // Joueur en surbrillance bleue
     init_pair(WALL_PAIR, COLOR_WHITE, COLOR_WHITE);    // Mur blanc sur blanc
-    init_pair(EXIT_PAIR, COLOR_BLACK, COLOR_GREEN);    // Sortie sur fond vert
-    init_pair(KEY_PAIR, COLOR_YELLOW, -1);    // Key yellow on black
-    init_pair(BONUS_PAIR, COLOR_GREEN, COLOR_GREEN);   // Bonus in green
-    init_pair(TRAP_PAIR, COLOR_RED, COLOR_RED);        // Trap in red
+    init_pair(EXIT_PAIR, COLOR_WHITE, COLOR_GREEN);    // Sortie sur fond vert
+    init_pair(KEY_PAIR, COLOR_YELLOW, -1);             // Key yellow on black
+    init_pair(BONUS_PAIR, COLOR_WHITE, COLOR_GREEN);   // Bonus in green
+    init_pair(TRAP_PAIR, COLOR_BLACK, COLOR_RED);      // Trap in red
+    init_pair(TROLL_PAIR, COLOR_ORANGE, COLOR_DARK_RED);// Troll in orange
+    init_pair(GHOST_PAIR, COLOR_CYAN, COLOR_DARK_CYAN); // Ghost in cyan
 
     int i;
     for(i = 0; i < lab.longueur; i++){
@@ -160,12 +187,22 @@ void ncurses_display_game_state(Labyrinth lab, int column, int row, int score){
             }
             else if(cell_value == BONUS_CELL){
                 attron(COLOR_PAIR(BONUS_PAIR));
-                mvprintw(y, x, " B ");
+                mvprintw(y, x, " o ");
                 attroff(COLOR_PAIR(EXIT_PAIR));
             }
             else if(cell_value == TRAP_CELL){
                 attron(COLOR_PAIR(TRAP_PAIR));
-                mvprintw(y, x, " T ");
+                mvprintw(y, x, " x ");
+                attroff(COLOR_PAIR(EXIT_PAIR));
+            } 
+            else if(cell_value == GHOST){ //virer ceux là du coup
+                attron(COLOR_PAIR(GHOST_PAIR));
+                mvprintw(y, x, "(\")");
+                attroff(COLOR_PAIR(EXIT_PAIR));
+            } 
+            else if(cell_value == TROLL){
+                attron(COLOR_PAIR(TROLL_PAIR));
+                mvprintw(y, x, "'o'");
                 attroff(COLOR_PAIR(EXIT_PAIR));
             } 
             else{
@@ -174,6 +211,7 @@ void ncurses_display_game_state(Labyrinth lab, int column, int row, int score){
                 attroff(COLOR_PAIR(WALL_PAIR));
             }
         }  
+        //TODO for pour prendre en compte l'array de monstre (parcourir puis cas, pas oublier le *3 pour la colonne)
     }
     mvprintw(i+1, 0, "SCORE : %d\t Bouger: haut:z, gauche:q, bas:s, droite:d", score);
     mvprintw(i+2, 0, "Quitter : ESC");
@@ -182,15 +220,15 @@ void ncurses_display_game_state(Labyrinth lab, int column, int row, int score){
 
 void display_menu(){
     printf( BOLD
-ORANGE " _           _                _       _   _     \n"
-ORANGE "| |         | |              (_)     | | | |    \n"
-ORANGE  "| |     __ _| |__  _   _ _ __ _ _ __ | |_| |__  \n"
+YELLOW " _           _                _       _   _     \n"
+YELLOW "| |         | |              (_)     | | | |    \n"
+YELLOW  "| |     __ _| |__  _   _ _ __ _ _ __ | |_| |__  \n"
 GREEN  "| |    / _` | '_ \\| | | | '__| | '_ \\| __| '_ \\ \n"
 GREEN   "| |___| (_| | |_) | |_| | |  | | | | | |_| | | |\n"
 BLUE   "\\_____/\\__,_|_.__/ \\__, |_|  |_|_| |_|\\__|_| |_|\n"
 BLUE   "                    __/ |                       \n"
 BLUE   "                   |___/                        \n" 
-ORANGE"1 : Créer un labyrinthe\n"
+YELLOW"1 : Créer un labyrinthe\n"
 "2 : Charger un labyrinthe\n"
 "3 : Jouer\n"
 "4 : Leaderboard\n"

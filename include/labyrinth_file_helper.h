@@ -6,6 +6,8 @@
 
 void ask_lab_size(int* row, int* column);
 
+void ask_difficulty(int* difficulty);
+
 void ask_lab_name(int size, char name[size]);
 
 void save_into_file(Labyrinth lab, const char* filename);

@@ -14,6 +14,9 @@ Labyrinth* init_labyrinth(int row, int column){
     new_lab->largeur = column;
     new_lab->longueur = row;
     new_lab->game = malloc(column*row*sizeof(int));
+    
+    new_lab->n_monsters = 0;
+    new_lab->monsters = NULL; //need number of monsters to malloc
     return new_lab;
 }
 
@@ -67,7 +70,7 @@ void create_labyrinth_path(Labyrinth* labyrinth){
     make_labyrinth_playable(labyrinth);
 }
 
-void init_create_recursive_labyrinth_path(Labyrinth* labyrinth){
+void init_create_recursive_labyrinth_path(Labyrinth* labyrinth, int difficult){
     int random_row;
     int random_column;
 
@@ -76,6 +79,12 @@ void init_create_recursive_labyrinth_path(Labyrinth* labyrinth){
 
     make_labyrinth_playable(labyrinth);
     add_score_mecanics(labyrinth, NB_BONUS, NB_TRAP);
+
+    if(difficult){
+        printf("pop\n");
+        make_lab_unperfect(labyrinth);
+        add_monsters(labyrinth);
+    }
 }
 
 Lab_cell* init_lab_cell(Labyrinth lab, int row, int column){
@@ -158,15 +167,31 @@ void shuffle_neighbours(Lab_cell* neighbours, int size) {
 }
 
 void pull_breakable_wall(Labyrinth lab, int* random_row, int* random_column){
+    int nb_rep = 0;
+    do{
+        *random_row = 1 + rand() % (lab.longueur - 2);
+        if(*random_row%2 == 0){
+            /*ensures it's an odd number*/
+            *random_column = (rand() % ((int)(lab.largeur - 2)/2)) *2 +1;
+        }
+        else{
+            /*ensures it's an even number*/
+            *random_column = (1 + rand() % ((int)(lab.largeur - 2)/2)) *2;
+        }
+        nb_rep++;
+        printf("%d\n", nb_rep);
+    }while(get_cell(lab, *random_row, *random_column) != WALL);
+}
 
-    *random_row = 1 + rand() % (lab.longueur - 2);
-    if(*random_row%2 == 0){
-        /*ensures it's an odd number*/
-        *random_column = (rand() % ((int)(lab.largeur - 2)/2)) *2 +1;
-    }
-    else{
-        /*ensures it's an even number*/
-        *random_column = (1 + rand() % ((int)(lab.largeur - 2)/2)) *2;
+void make_lab_unperfect(Labyrinth* labyrinth){
+    int nb_to_break = (labyrinth->largeur * labyrinth->longueur)/RATIO_WALL_TO_BREAK;
+    int nb_broken = 0;
+    printf("%d\n", nb_to_break);
+    while (nb_broken < nb_to_break){
+        int random_row, random_column;
+        pull_breakable_wall(*labyrinth, &random_row, &random_column);
+        set_cell(labyrinth, random_row, random_column, PATH);
+        nb_broken++;
     }
 }
 
@@ -194,7 +219,7 @@ void unify_room_number(Labyrinth* labyrinth, int number_to_place, int number_to_
 }
 
 int make_labyrinth_playable(Labyrinth* labyrinth){
-    set_cell(labyrinth, 0, 1, PLAYER);
+    set_cell(labyrinth, STARTING_ROW, STARTING_COLUMN, PLAYER);
     set_cell(labyrinth, labyrinth->longueur -1 , labyrinth->largeur - 2, EXIT);
     return 0;
 }
@@ -236,5 +261,9 @@ Labyrinth* copy_labyrinth(Labyrinth labyrinth){
 
 void destroy_labyrinth(Labyrinth* labyrinth){
     free(labyrinth->game);
+    for(int i = 0; i < labyrinth->n_monsters; i++){
+        destroy_monster(&(labyrinth->monsters[i]));
+    }
+    free(labyrinth->monsters);
     free(labyrinth);
 }

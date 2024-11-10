@@ -6,18 +6,23 @@
 #include "game.h"
 #include "leaderboard.h"
 
+#include "labyrinth_file_helper.h"
+
 int main()
 {
-    /*Labyrinth* lab = init_labyrinth(15, 13);
+
+    Labyrinth* lab = init_labyrinth(15, 13);
     init_unformed_labyrinth(lab);
 
-    init_create_recursive_labyrinth_path(lab);
+    init_create_recursive_labyrinth_path(lab, 1);
+    //create_labyrinth_path(lab);
 
     display_game_square(*lab); 
     
     destroy_labyrinth(lab);
 
-    Leaderboard* lb = init_leaderboard();
+
+    /*Leaderboard* lb = init_leaderboard();
     P_score* pc = init_player_score("Paul", 3000);
     P_score* pc2 = init_player_score("Erathostenes", -100);
     lb->score_list[0] = *pc;

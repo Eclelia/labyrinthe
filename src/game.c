@@ -61,14 +61,16 @@ Labyrinth* create_and_save(){
     int row;
     int column;
     char name[NAME_SIZE];
+    int difficulty;
 
     ask_lab_size(&row, &column);
     ask_lab_name(NAME_SIZE, name);
+    ask_difficulty(&difficulty);
 
     Labyrinth* lab = init_labyrinth(row, column);
     init_unformed_labyrinth(lab);
 
-    init_create_recursive_labyrinth_path(lab);
+    init_create_recursive_labyrinth_path(lab, difficulty);
 
     save_into_file(*lab, name);
 
@@ -79,9 +81,9 @@ Labyrinth* create_and_save(){
 
 int play_labyrinth(Labyrinth loaded_lab, const char* lab_name){
     Labyrinth* lab_copy = copy_labyrinth(loaded_lab);
-    //initial player position //TODO write "get player position" function
-    int player_row = 0;
-    int player_column = 1;
+    //initial player position
+    int player_row = STARTING_ROW;
+    int player_column = STARTING_COLUMN;
 
     initscr();
     keypad(stdscr, TRUE);
@@ -103,12 +105,14 @@ int play_labyrinth(Labyrinth loaded_lab, const char* lab_name){
                 case LEFT: next_x--; break;
                 case RIGHT: next_x++; break;
             }
-            won = check_collision(lab_copy, next_y, next_x, &player_row, &player_column, &score, &found_key);
 
             //TODO move monsters
+
+            won = check_collision(lab_copy, next_y, next_x, &player_row, &player_column, &score, &found_key);
         }
         if(won){ //won can change value in previous if
             clear();
+            //TODO display_win (en mode ncurses)
             mvprintw(0,0,"Vous avez gagné. Veuillez appuyer sur ESC pour continuer");
         }
 
@@ -118,15 +122,13 @@ int play_labyrinth(Labyrinth loaded_lab, const char* lab_name){
     Leaderboard* lb = load_lb_from_file(lab_name);
     char name[NAME_SIZE];
 
-    display_lb(*lb);
-
-    if(score > get_lowest_score(*lb)){
-        ask_player_name(NAME_SIZE, name);
-        add_player(lb, lab_name, name, score);
+    if(won){ //TODO need test
+        if(score > get_lowest_score(*lb)){
+            ask_player_name(NAME_SIZE, name);
+            add_player(lb, lab_name, name, score);
+        }
+        display_lb(*lb);
     }
-    
-
-    //TODO check score pour faire le leaderboard (demande prénom + enregistrer dans fichier)
     return 1;
 }
 
@@ -156,6 +158,9 @@ int check_collision(Labyrinth* lab, int next_y, int next_x, int* player_row, int
             break;
         }
         //get si monstre -> score perdu
+        //TODO for each de la liste de monstre
+            //si current pos = *player_row ,*player_column;
+            //perdre le nb de score de son malus
     }
     ncurses_display_game_state(*lab, *player_column, *player_row, *score);
 

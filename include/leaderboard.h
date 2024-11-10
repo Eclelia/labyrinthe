@@ -2,16 +2,17 @@
 #define LEADERBOARD_H
 
 #define LEADERBOARD_SIZE 10
+#include "game_struct.h"
 
-typedef struct Player_score{
+struct Player_score{
     char* name;
     int score;
-} P_score;
+};
 
-typedef struct Leaderboard{
+struct Leaderboard{
     P_score* score_list;
     int nb_of_scores;
-} Leaderboard;
+};
 
 Leaderboard* init_leaderboard();
 
