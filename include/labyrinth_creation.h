@@ -4,7 +4,7 @@
 
 #define RATIO_WALL_TO_BREAK 65
 #define RATIO_BONUS 32
-#define RATIO_TRAP RATIO_BONUS/3
+#define RATIO_TRAP RATIO_BONUS/2
 
 #define DATA_PATH "data/"
 

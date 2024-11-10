@@ -81,7 +81,7 @@ Labyrinth* load_from_file(const char* filename){ //TODO erreur si fichier corrom
 
     fscanf(file, "\n%d\n", &n_monster);
     lab->n_monsters = n_monster;
-    printf("n_monstre %d\n", lab->n_monsters); //TODO tester quand y'a des monstres
+    
     lab->monsters = malloc(sizeof(Monster)*lab->n_monsters);
     for (int i = 0; i < lab->n_monsters; i++){
         int m_column, m_row, m_type, m_penalty;

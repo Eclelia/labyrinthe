@@ -85,34 +85,44 @@ void add_troll(Labyrinth* lab, int nb_bonuses) { //TODO 2 trolls peuvent spawn s
     lab->n_monsters = lab->n_monsters+1;
 }
 
+void choose_direction(int* d_row, int* d_column){
+    *d_column = rand() % 3 - 1;
+    if(*d_column != 0){ //avoid diagonal movements 
+        *d_row = 0;
+    }
+    else{
+        *d_row = rand() % 3 - 1;
+    }
+}
+
 //it's possible that a ghost doesn't move
 int move_ghost(Labyrinth* lab, Monster* monster) {
-    int d_column = rand() % 3 - 1; //go left or right or not
-    int d_row = rand() % 3 - 1; //go up or down or not
+    int d_column, d_row;
+    choose_direction(&d_row, &d_column);
 
-    int next_column = monster->column + d_column;
-    int next_row = monster->row + d_row;
+    int next_column = monster->current_column + d_column;
+    int next_row = monster->current_row + d_row;
 
-    int next_cell = get_cell(*lab, next_row, next_column);
-    if (next_cell != UNDEFINED && next_cell != EXIT && next_cell != CLOSED_EXIT) { //can move //TODO check si bon ordre
-        monster->row = next_row;
-        monster->column = next_column;
+    int next_cell = get_cell(*lab, next_row, next_column);//TODO check si bon ordre
+    if (next_cell != UNDEFINED && next_cell != EXIT && next_cell != CLOSED_EXIT && next_cell != PLAYER) { //can move
+        monster->current_row = next_row;
+        monster->current_column = next_column;
     }
     return GHOST;
 }
 
 //it's possible that a troll doesn't move
 int move_troll( Labyrinth* lab, Monster* monster) { //TODO : l'empecher de trop s'éloigner du bonus
-    int d_column = rand() % 3 - 1; //go left or right or not
-    int d_row = rand() % 3 - 1; //go up or down or not
+    int d_column, d_row;
+    choose_direction(&d_row, &d_column);
 
-    int next_column = monster->column + d_column;
-    int next_row = monster->row + d_row;
+    int next_column = monster->current_column + d_column;
+    int next_row = monster->current_row + d_row;
 
-    int next_cell = get_cell(*lab, next_row, next_column);
-    if (next_cell != UNDEFINED && next_cell != WALL && next_cell != EXIT && next_cell != CLOSED_EXIT) { //can move //TODO check si bon ordre
-        monster->row = next_row;
-        monster->column = next_column;
+    int next_cell = get_cell(*lab, next_row, next_column);  //TODO check si bon ordre
+    if (next_cell != UNDEFINED && next_cell != WALL && next_cell != EXIT && next_cell != CLOSED_EXIT && next_cell != PLAYER) { //can move
+        monster->current_row = next_row;
+        monster->current_column = next_column;
     }
     return TROLL;
 }

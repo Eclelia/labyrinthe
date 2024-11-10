@@ -26,6 +26,8 @@ Monster* create_ghost(int row, int column);
 
 Monster* create_troll(int row, int column);
 
+void choose_direction(int* d_row, int* d_column);
+
 void move_monsters(Labyrinth* lab);
 
 int move_ghost(Labyrinth* lab, Monster* monster);

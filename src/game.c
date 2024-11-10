@@ -101,15 +101,19 @@ int play_labyrinth(Labyrinth loaded_lab, const char* lab_name){
         int next_x = player_column;
         int next_y = player_row;
 
-        if(!won){ //player can move
+        if(!won && is_a_movement(ch)){ //player can move
             switch (ch) {
-                case UP: next_y--; break;
-                case DOWN: next_y++; break;
-                case LEFT: next_x--; break;
-                case RIGHT: next_x++; break;
+                case UP: 
+                case UP_U: next_y--; break;
+                case DOWN: 
+                case DOWN_U: next_y++; break;
+                case LEFT: 
+                case LEFT_U: next_x--; break;
+                case RIGHT: 
+                case RIGHT_U: next_x++; break;
             }
 
-            //TODO move monsters
+            move_monsters(lab_copy);
 
             won = check_collision(lab_copy, next_y, next_x, &player_row, &player_column, &score, &found_key);
         }
@@ -141,39 +145,61 @@ int play_labyrinth(Labyrinth loaded_lab, const char* lab_name){
 }
 
 int check_collision(Labyrinth* lab, int next_y, int next_x, int* player_row, int* player_column, int* score, int* found_key){ //TODO struct game_state ?
-    int next_cell = get_cell(*lab, next_y, next_x);  
-    if (next_cell != WALL && next_cell != UNDEFINED && next_cell != CLOSED_EXIT) { //can move
-        *player_row = next_y;
-        *player_column = next_x;
+    int next_cell = get_cell(*lab, next_y, next_x); 
+    if(next_y != *player_row || next_x != *player_column){ //position changed 
+        if (next_cell != WALL && next_cell != UNDEFINED && next_cell != CLOSED_EXIT) { //can move
+            *player_row = next_y;
+            *player_column = next_x;
 
-        *score -= MOVING_COST;
+            *score -= MOVING_COST;
 
-        switch (next_cell){
-        case KEY:
-            *found_key = 1;
-            set_cell(lab, next_y, next_x, PATH);
-            set_cell(lab, lab->longueur -1 , lab->largeur - 2, EXIT);
-            break;
-        case BONUS_CELL:
-            *score += BONUS;
-            set_cell(lab, next_y, next_x, PATH);
-            break;
-        case TRAP_CELL:
-            *score += MALUS;
-            set_cell(lab, next_y, next_x, PATH);
-            break;
-        default:
-            break;
+            switch (next_cell){
+            case KEY:
+                *found_key = 1;
+                set_cell(lab, next_y, next_x, PATH);
+                set_cell(lab, lab->longueur -1 , lab->largeur - 2, EXIT);
+                break;
+            case BONUS_CELL:
+                *score += BONUS;
+                set_cell(lab, next_y, next_x, PATH);
+                break;
+            case TRAP_CELL:
+                *score += MALUS;
+                set_cell(lab, next_y, next_x, PATH);
+                break;
+            default:
+                break;
+            }
         }
-        //get si monstre -> score perdu
-        //TODO for each de la liste de monstre
-            //si current pos = *player_row ,*player_column;
-            //perdre le nb de score de son malus
     }
+    //collisions with monsters
+    for(int k = 0; k < lab->n_monsters; k++){
+        Monster mon = lab->monsters[k]; 
+        if(mon.current_row == *player_row && mon.current_column == *player_column){ //collision
+            *score += mon.penalty;
+        }
+    }
+
     ncurses_display_game_state(*lab, *player_column, *player_row, *score);
 
     if(next_cell == EXIT && *found_key){
         return 1; //won
     }
     return 0; //no event
+}
+
+int is_a_movement(int value) {
+    switch (value) {
+        case UP: 
+        case UP_U:
+        case DOWN: 
+        case DOWN_U:
+        case LEFT: 
+        case LEFT_U:
+        case RIGHT: 
+        case RIGHT_U:
+            return 1; //value is in enum
+        default:
+            return 0;
+    }
 }

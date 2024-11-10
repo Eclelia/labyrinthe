@@ -198,9 +198,6 @@ void ncurses_display_game_state(Labyrinth lab, int column, int row, int score){ 
         }  
     }
     //display monsters
-    attron(COLOR_PAIR(TROLL_PAIR));
-    mvprintw(0, 0, "%d", lab.n_monsters);
-    attroff(COLOR_PAIR(EXIT_PAIR));
     for(int k = 0; k < lab.n_monsters; k++){
         Monster mon = lab.monsters[k]; 
         switch (mon.type){

@@ -12,6 +12,10 @@ typedef enum{
     DOWN = 's',
     LEFT = 'q',
     RIGHT = 'd',
+    UP_U = 'Z',
+    DOWN_U = 'S',
+    LEFT_U = 'Q',
+    RIGHT_U = 'D',
     ESCAPE = 27,
 } Movement;
 
@@ -32,5 +36,7 @@ Labyrinth* create_and_save();
 int play_labyrinth(Labyrinth loaded_lab, const char* lab_name);
 
 int check_collision(Labyrinth* lab, int next_y, int next_x, int* player_row, int* player_column, int* score, int* found_key);
+
+int is_a_movement(int value);
 
 #endif
