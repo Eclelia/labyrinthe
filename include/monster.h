@@ -4,7 +4,7 @@
 #include "game_struct.h"
 
 #define RATIO_GHOST 65
-#define RATIO_TROLL(nb_bonuses) ((1/3)*nb_bonuses) 
+#define RATIO_TROLL(nb_bonuses) (nb_bonuses/3) 
 
 typedef enum{
     GHOST_P = -10,

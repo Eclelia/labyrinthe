@@ -167,7 +167,6 @@ void shuffle_neighbours(Lab_cell* neighbours, int size) {
 }
 
 void pull_breakable_wall(Labyrinth lab, int* random_row, int* random_column){
-    int nb_rep = 0;
     do{
         *random_row = 1 + rand() % (lab.longueur - 2);
         if(*random_row%2 == 0){
@@ -178,15 +177,12 @@ void pull_breakable_wall(Labyrinth lab, int* random_row, int* random_column){
             /*ensures it's an even number*/
             *random_column = (1 + rand() % ((int)(lab.largeur - 2)/2)) *2;
         }
-        nb_rep++;
-        printf("%d\n", nb_rep);
     }while(get_cell(lab, *random_row, *random_column) != WALL);
 }
 
 void make_lab_unperfect(Labyrinth* labyrinth){
     int nb_to_break = (labyrinth->largeur * labyrinth->longueur)/RATIO_WALL_TO_BREAK;
     int nb_broken = 0;
-    printf("%d\n", nb_to_break);
     while (nb_broken < nb_to_break){
         int random_row, random_column;
         pull_breakable_wall(*labyrinth, &random_row, &random_column);
@@ -255,15 +251,23 @@ Labyrinth* copy_labyrinth(Labyrinth labyrinth){
             set_cell(copy, i, j, get_cell(labyrinth, i, j));
         }
     }
+    copy->n_monsters = labyrinth.n_monsters;
+    copy->monsters = malloc(sizeof(Monster) * labyrinth.n_monsters);
 
+    for(int i = 0; i < labyrinth.n_monsters; i++){
+        Monster* mon = create_monster(
+            labyrinth.monsters[i].row, 
+            labyrinth.monsters[i].column, 
+            labyrinth.monsters[i].type, 
+            labyrinth.monsters[i].penalty);
+        copy->monsters[i] = *mon;
+        printf("monstre n°%d: [%d %d] %d\n", i, labyrinth.monsters[i].column, labyrinth.monsters[i].row, labyrinth.monsters[i].type);
+    }
     return copy;
 }
 
 void destroy_labyrinth(Labyrinth* labyrinth){
     free(labyrinth->game);
-    for(int i = 0; i < labyrinth->n_monsters; i++){
-        destroy_monster(&(labyrinth->monsters[i]));
-    }
     free(labyrinth->monsters);
     free(labyrinth);
 }

@@ -132,7 +132,7 @@ void display_game_with_player(Labyrinth lab, int column, int row, int wait){
     system("clear");
 }
 
-void ncurses_display_game_state(Labyrinth lab, int column, int row, int score){
+void ncurses_display_game_state(Labyrinth lab, int column, int row, int score){ //TODO mettre tout les init de ncurses ds une fonction à part ?
     clear();
     use_default_colors();
     start_color();
@@ -195,23 +195,36 @@ void ncurses_display_game_state(Labyrinth lab, int column, int row, int score){
                 mvprintw(y, x, " x ");
                 attroff(COLOR_PAIR(EXIT_PAIR));
             } 
-            else if(cell_value == GHOST){ //virer ceux là du coup
-                attron(COLOR_PAIR(GHOST_PAIR));
-                mvprintw(y, x, "(\")");
-                attroff(COLOR_PAIR(EXIT_PAIR));
-            } 
-            else if(cell_value == TROLL){
-                attron(COLOR_PAIR(TROLL_PAIR));
-                mvprintw(y, x, "'o'");
-                attroff(COLOR_PAIR(EXIT_PAIR));
-            } 
             else{
                 attron(COLOR_PAIR(WALL_PAIR));
                 mvprintw(y, x, "   ");
                 attroff(COLOR_PAIR(WALL_PAIR));
             }
         }  
-        //TODO for pour prendre en compte l'array de monstre (parcourir puis cas, pas oublier le *3 pour la colonne)
+    }
+    //display monsters
+    attron(COLOR_PAIR(TROLL_PAIR));
+    mvprintw(0, 0, "%d", lab.n_monsters);
+    attroff(COLOR_PAIR(EXIT_PAIR));
+    for(int k = 0; k < lab.n_monsters; k++){
+        Monster mon = lab.monsters[k]; 
+        switch (mon.type){
+        case GHOST :
+            attron(COLOR_PAIR(GHOST_PAIR));
+            mvprintw(mon.current_row, mon.current_column*3, "(\")");
+            attroff(COLOR_PAIR(EXIT_PAIR));
+            break;
+        case TROLL :
+            attron(COLOR_PAIR(TROLL_PAIR));
+            mvprintw(mon.current_row, mon.current_column*3, "'o'");
+            attroff(COLOR_PAIR(EXIT_PAIR));
+            break;
+        default : 
+            attron(COLOR_PAIR(TROLL_PAIR));
+            mvprintw(0, 0, "'o'");
+            attroff(COLOR_PAIR(EXIT_PAIR));
+            break;
+        }
     }
     mvprintw(i+1, 0, "SCORE : %d\t Bouger: haut:z, gauche:q, bas:s, droite:d", score);
     mvprintw(i+2, 0, "Quitter : ESC");

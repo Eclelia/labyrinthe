@@ -37,7 +37,10 @@ void handle_game(){
                 printf(RED_HIGHLIGHT "Veuillez d'abord charger un labyrinthe" ENDCOLOR "\n");
             }
             else{
-                //printf("%s\n", loaded_lab_name);
+                printf("n_mon : %d\n", loaded_lab->n_monsters);
+                for(int i = 0; i < loaded_lab->n_monsters; i++){
+                    printf("monstre n°%d: [%d %d] %d\n", i, loaded_lab->monsters[i].column, loaded_lab->monsters[i].row, loaded_lab->monsters[i].type);
+                }
                 play_labyrinth(*loaded_lab, loaded_lab_name);
             }
             menu_choice = MENU;
@@ -120,14 +123,19 @@ int play_labyrinth(Labyrinth loaded_lab, const char* lab_name){
     endwin();
     system("clear");
     Leaderboard* lb = load_lb_from_file(lab_name);
-    char name[NAME_SIZE];
+    if(lb == NULL){
+        printf(RED_HIGHLIGHT "Un problème s'est produit avec le classement." ENDCOLOR "\n");
+    }
+    else{
+        char name[NAME_SIZE];
 
-    if(won){ //TODO need test
-        if(score > get_lowest_score(*lb)){
-            ask_player_name(NAME_SIZE, name);
-            add_player(lb, lab_name, name, score);
+        if(won){ //TODO need test
+            if(score > get_lowest_score(*lb)){
+                ask_player_name(NAME_SIZE, name);
+                add_player(lb, lab_name, name, score);
+            }
+            display_lb(*lb);
         }
-        display_lb(*lb);
     }
     return 1;
 }
