@@ -67,7 +67,7 @@ void add_ghost(Labyrinth* lab) {
         random_row = rand() % lab->longueur;
         random_column = rand() % lab->largeur;
         pulled_cell = get_cell(*lab, random_row, random_column);
-    }while(pulled_cell != PLAYER && pulled_cell != EXIT && pulled_cell != CLOSED_EXIT);
+    }while(pulled_cell == PLAYER && pulled_cell == EXIT && pulled_cell == CLOSED_EXIT);
 
     Monster* new_ghost = create_ghost(random_row, random_column);
     lab->monsters[lab->n_monsters] = *new_ghost;

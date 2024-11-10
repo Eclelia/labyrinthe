@@ -78,7 +78,8 @@ void init_create_recursive_labyrinth_path(Labyrinth* labyrinth, int difficult){
     create_recursive_labyrinth_path(labyrinth, random_row, random_column);
 
     make_labyrinth_playable(labyrinth);
-    add_score_mecanics(labyrinth, NB_BONUS, NB_TRAP);
+    int lab_size = labyrinth->largeur * labyrinth->longueur;
+    add_score_mecanics(labyrinth, lab_size/RATIO_BONUS, lab_size/RATIO_TRAP);
 
     if(difficult){
         printf("pop\n");
@@ -146,7 +147,7 @@ void create_recursive_labyrinth_path(Labyrinth* labyrinth, int current_row, int 
             int wall_column = (neighbours[direction].column + current_column)/2;
             set_cell(labyrinth, wall_row, wall_column, cell_value);
 
-            display_game_with_player(*labyrinth, wall_column, wall_row, 1);
+            //display_game_with_player(*labyrinth, wall_column, wall_row, 1);
 
             //donner la nouvelle case à cell_value
             create_recursive_labyrinth_path(labyrinth, neighbours[direction].row, neighbours[direction].column);
@@ -201,7 +202,7 @@ void pull_random_empty_cell(Labyrinth lab, int* random_row, int* random_column){
     do{
         *random_row = (rand() % ((lab.longueur - 1)/2)) *2 +1; //TODO changer la formule pour que ça soit n'imp quelle cellule
         *random_column = (rand() % ((lab.largeur - 1)/2)) *2 +1;
-    }while(get_cell(lab, *random_row, *random_column) == WALL);
+    }while(get_cell(lab, *random_row, *random_column) < WALL);
 }
 
 void unify_room_number(Labyrinth* labyrinth, int number_to_place, int number_to_replace){

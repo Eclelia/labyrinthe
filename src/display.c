@@ -162,12 +162,7 @@ void ncurses_display_game_state(Labyrinth lab, int column, int row, int score){ 
             int y = i;
             int x = j * 3;
 
-            if(i == row && j == column){
-                attron(COLOR_PAIR(PLAYER_PAIR));
-                mvprintw(y, x, "   "); // Position du joueur
-                attroff(COLOR_PAIR(PLAYER_PAIR));
-            }
-            else if(cell_value > WALL || cell_value == PLAYER){ //if not a wall
+            if(cell_value > WALL || cell_value == PLAYER){ //if not a wall
                 mvprintw(y, x, "   ");
             }
             else if(cell_value == EXIT){ // the exit
@@ -226,6 +221,10 @@ void ncurses_display_game_state(Labyrinth lab, int column, int row, int score){ 
             break;
         }
     }
+    //display_player (so they're on top)
+    attron(COLOR_PAIR(PLAYER_PAIR));
+        mvprintw(row, column*3, "   "); // Position du joueur
+    attroff(COLOR_PAIR(PLAYER_PAIR));
     mvprintw(i+1, 0, "SCORE : %d\t Bouger: haut:z, gauche:q, bas:s, droite:d", score);
     mvprintw(i+2, 0, "Quitter : ESC");
     refresh();

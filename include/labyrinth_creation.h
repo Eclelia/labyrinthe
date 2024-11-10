@@ -2,9 +2,6 @@
 #define LABYRINTH_CREATION_H
 #include "labyrinth.h"
 
-#define NB_TRAP 4 //TODO to delete
-#define NB_BONUS 6 //TODO to delete
-
 #define RATIO_WALL_TO_BREAK 65
 #define RATIO_BONUS 32
 #define RATIO_TRAP RATIO_BONUS/3
