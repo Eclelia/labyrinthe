@@ -6,6 +6,7 @@
 #include <ncurses.h>
 #include "display.h"
 #include "labyrinth.h"
+#include "leaderboard.h"
 
 void display_game(Labyrinth lab){
     for(int i = 0; i < lab.longueur; i++){
@@ -220,10 +221,11 @@ void ncurses_display_game_state(Labyrinth lab, int column, int row, int score){ 
     }
     //display_player (so they're on top)
     attron(COLOR_PAIR(PLAYER_PAIR));
-        mvprintw(row, column*3, "   "); // Position du joueur
+    mvprintw(row, column*3, "   "); // Position du joueur
     attroff(COLOR_PAIR(PLAYER_PAIR));
-    mvprintw(i+1, 0, "SCORE : %d\t Bouger: haut:z, gauche:q, bas:s, droite:d", score);
-    mvprintw(i+2, 0, "Quitter : ESC");
+
+    //display GUI
+    display_GUI(score);
     refresh();
 }
 
@@ -231,9 +233,9 @@ void display_menu(){
     printf( BOLD
 YELLOW " _           _                _       _   _     \n"
 YELLOW "| |         | |              (_)     | | | |    \n"
-YELLOW  "| |     __ _| |__  _   _ _ __ _ _ __ | |_| |__  \n"
+YELLOW "| |     __ _| |__  _   _ _ __ _ _ __ | |_| |__  \n"
 GREEN  "| |    / _` | '_ \\| | | | '__| | '_ \\| __| '_ \\ \n"
-GREEN   "| |___| (_| | |_) | |_| | |  | | | | | |_| | | |\n"
+GREEN  "| |___| (_| | |_) | |_| | |  | | | | | |_| | | |\n"
 BLUE   "\\_____/\\__,_|_.__/ \\__, |_|  |_|_| |_|\\__|_| |_|\n"
 BLUE   "                    __/ |                       \n"
 BLUE   "                   |___/                        \n" 
@@ -242,4 +244,73 @@ YELLOW"1 : Créer un labyrinthe\n"
 "3 : Jouer\n"
 "4 : Leaderboard\n"
 "5 : Quitter\n" ENDCOLOR);
+}
+
+void display_win(){ //only in ncurses mode
+    init_pair(WIN_PAIR, COLOR_BLUE, -1);
+    attron(COLOR_PAIR(WIN_PAIR));
+    mvprintw(0,0,
+"__  __                                       __\n"
+"\\ \\/ /___  __  __   _      ______  ____     / /\n"
+" \\  / __ \\/ / / /  | | /| / / __ \\/ __ \\   / / \n"
+" / / /_/ / /_/ /   | |/ |/ / /_/ / / / /  /_/  \n"
+"/_/\\____/\\__,_/    |__/|__/\\____/_/ /_/  (_)   \n");
+    attroff(COLOR_PAIR(WIN_PAIR));
+
+    init_pair(KEY_PAIR, COLOR_YELLOW, -1);
+    mvprintw(7, 0, "Veuillez appuyer sur ESC pour continuer.\n");
+    attroff(COLOR_PAIR(KEY_PAIR));
+
+    refresh();
+}
+
+void display_highscore_message(){
+    char* animation_color[5] = {BLUE, BLUE, BLUE, GREEN, YELLOW};
+    for(int i = 0; i < 3; i++){
+        system("clear");
+        printf(
+        "%s    _   __                __  ___       __                                 __\n"
+        "   / | / /__ _      __   / / / (_)___ _/ /_  ______________  ________     / /\n" ENDCOLOR
+        "%s  /  |/ / _ \\ | /| / /  / /_/ / / __ `/ __ \\/ ___/ ___/ __ \\/ ___/ _ \\   / / \n"
+        " / /|  /  __/ |/ |/ /  / __  / / /_/ / / / (__  ) /__/ /_/ / /  /  __/  /_/  \n" ENDCOLOR
+        "%s/_/ |_/\\___/|__/|__/  /_/ /_/_/\\__, /_/ /_/____/\\___/\\____/_/   \\___/  (_)   \n"
+        "                              /____/                                         \n" ENDCOLOR, 
+        animation_color[i+2], animation_color[i+1], animation_color[i]);
+        usleep(250000);
+    }
+}
+
+void display_leaderboard(Leaderboard lb){
+    printf(YELLOW
+        "╔═════════════════════════════════════════════════════════════╗\n"
+	    "║_.~\"~._.~\"~._.~\"~._.~\"~._Leaderboard_.~\"~._.~\"~._.~\"~._.~\"~..║\n"
+	    "╠══════╦══════════════════════════════════════╦═══════════════╣\n"
+	    "║ Rank ║                 Name                 ║     Score     ║\n"
+	    "╠══════╬══════════════════════════════════════╬═══════════════╣\n"
+    );
+	
+	for(int i = 0; i<lb.nb_of_scores; i++){
+		printf("║ %4d ║ %36s ║ %13d ║\n", i+1, lb.score_list[i].name, lb.score_list[i].score);
+	}
+	printf("╚══════╩══════════════════════════════════════╩═══════════════╝\n" ENDCOLOR);
+}
+
+void display_GUI(int score){
+    mvprintw(LINES - 4, 0, "SCORE : %d\t Bouger: haut:z, gauche:q, bas:s, droite:d\t Quitter : ESC", score);
+    mvprintw(LINES - 3, 0, "\tSortie : ");
+    attron(COLOR_PAIR(EXIT_PAIR)); printw(" E "); attroff(COLOR_PAIR(EXIT_PAIR));
+    printw("\tSortie fermée : ");
+    attron(COLOR_PAIR(EXIT_PAIR)); printw("xxx"); attroff(COLOR_PAIR(EXIT_PAIR));
+    printw("\t Clé (ouvre la porte): ");
+    attron(COLOR_PAIR(KEY_PAIR)); printw(" K"); attroff(COLOR_PAIR(EXIT_PAIR));
+
+    mvprintw(LINES - 2, 0, "MALUS : Piege :  ");
+    attron(COLOR_PAIR(TRAP_PAIR)); printw(" x "); attroff(COLOR_PAIR(EXIT_PAIR));
+    printw("\tFantôme : ");
+    attron(COLOR_PAIR(GHOST_PAIR)); printw("(\")"); attroff(COLOR_PAIR(EXIT_PAIR));
+    printw("\t\tOgre :");
+    attron(COLOR_PAIR(TROLL_PAIR)); printw("'o'"); attroff(COLOR_PAIR(EXIT_PAIR));
+
+    mvprintw(LINES - 1, 0, "BONUS : ");
+    attron(COLOR_PAIR(BONUS_PAIR)); printw(" o "); attroff(COLOR_PAIR(EXIT_PAIR)); 
 }

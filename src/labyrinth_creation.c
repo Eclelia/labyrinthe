@@ -4,6 +4,7 @@
 #include "labyrinth_creation.h"
 #include "labyrinth.h"
 #include "display.h"
+#include "game_struct.h"
 
 Labyrinth* init_labyrinth(int row, int column){
     srand(time(NULL));
@@ -146,7 +147,9 @@ void create_recursive_labyrinth_path(Labyrinth* labyrinth, int current_row, int 
             int wall_column = (neighbours[direction].column + current_column)/2;
             set_cell(labyrinth, wall_row, wall_column, cell_value);
 
-            //display_game_with_player(*labyrinth, wall_column, wall_row, 1);
+            if(DISPLAY_CREATION == 1){
+                display_game_with_player(*labyrinth, wall_column, wall_row, 1);
+            }
 
             //donner la nouvelle case à cell_value
             create_recursive_labyrinth_path(labyrinth, neighbours[direction].row, neighbours[direction].column);

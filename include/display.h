@@ -29,6 +29,7 @@
 #define TRAP_PAIR 6
 #define GHOST_PAIR 7
 #define TROLL_PAIR 8
+#define WIN_PAIR 9
 
 #define COLOR_DARK_RED COLOR_WHITE+1
 #define COLOR_DARK_CYAN COLOR_WHITE+2
@@ -45,5 +46,13 @@ void display_game_with_player(Labyrinth lab, int column, int row, int wait);
 void ncurses_display_game_state(Labyrinth lab, int column, int row, int score);
 
 void display_menu();
+
+void display_win();
+
+void display_highscore_message();
+
+void display_leaderboard(Leaderboard lb);
+
+void display_GUI(int score);
 
 #endif

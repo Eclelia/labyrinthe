@@ -47,7 +47,7 @@ void handle_game(){
                 printf(RED_HIGHLIGHT "Fichier non trouvé ou corrompu" ENDCOLOR "\n");
             }
             else{
-                display_lb(*loaded_lb);
+                display_leaderboard(*loaded_lb);
             }
             menu_choice = MENU;
             free(loaded_lb);
@@ -82,7 +82,6 @@ Labyrinth* create_and_save(int size, char name[size]){
 }
 
 int play_labyrinth(Labyrinth loaded_lab, const char* lab_name){
-    printf("lab_name : %s\n", lab_name);
     Labyrinth* lab_copy = copy_labyrinth(loaded_lab);
     //initial player position
     int player_row = STARTING_ROW;
@@ -121,8 +120,8 @@ int play_labyrinth(Labyrinth loaded_lab, const char* lab_name){
 
         if(won){ //won can change value in previous if
             clear();
-            //TODO display_win (en mode ncurses)
-            mvprintw(0,0,"Vous avez gagné. Veuillez appuyer sur ESC pour continuer");
+            display_win();
+            //mvprintw(0,0,"Vous avez gagné. Veuillez appuyer sur ESC pour continuer");
         }
 
     } while ((ch = getch()) != ESCAPE); 
@@ -138,10 +137,11 @@ int play_labyrinth(Labyrinth loaded_lab, const char* lab_name){
 
         if(won){
             if(score > get_lowest_score(*lb)){
+                display_highscore_message();
                 ask_player_name(NAME_SIZE, name);
                 add_player(lb, lab_name, name, score);
             }
-            display_lb(*lb);
+            display_leaderboard(*lb);
         }
     }
     return 1;

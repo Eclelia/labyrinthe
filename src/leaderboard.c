@@ -91,13 +91,6 @@ Leaderboard* load_lb_from_file(const char* filename){ //TODO erreur si fichier c
     return loaded_lb;
 }
 
-void display_lb(Leaderboard lb){
-    printf("-----LEADERBOARD-----\n");
-    for(int i = 0; i < lb.nb_of_scores; i++){
-        printf("%2d. Joueur : %20s  Score : %d\n", i+1, lb.score_list[i].name, lb.score_list[i].score);
-    }
-}
-
 int get_lowest_score(Leaderboard lb){
     return lb.score_list[lb.nb_of_scores - 1].score;
 }

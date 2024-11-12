@@ -1,6 +1,8 @@
 #ifndef GAME_STRUCT_H
 #define GAME_STRUCT_H
 
+#define DISPLAY_CREATION 0
+
 typedef struct Monster Monster;
 typedef struct Labyrinth Labyrinth;
 typedef struct Labyrinth_cell Lab_cell;

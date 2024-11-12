@@ -38,6 +38,4 @@ int compare_scores(const void *player_a, const void *player_b);
 
 void destroy_leaderboard(Leaderboard* lb);
 
-void display_lb(Leaderboard lb);
-
 #endif
