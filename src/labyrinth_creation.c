@@ -202,7 +202,7 @@ void pull_random_cell(Labyrinth lab, int* random_row, int* random_column){
 
 void pull_random_empty_cell(Labyrinth lab, int* random_row, int* random_column){
     do{
-        *random_row = (rand() % ((lab.longueur - 1)/2)) *2 +1; //TODO changer la formule pour que ça soit n'imp quelle cellule
+        *random_row = (rand() % ((lab.longueur - 1)/2)) *2 +1; //TODO changer la formule pour que ça soit n'imp quelle cellule ou dire que fait exprès pour rapidité
         *random_column = (rand() % ((lab.largeur - 1)/2)) *2 +1;
     }while(get_cell(lab, *random_row, *random_column) < WALL);
 }

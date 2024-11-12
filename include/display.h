@@ -55,4 +55,6 @@ void display_leaderboard(Leaderboard lb);
 
 void display_GUI(int score);
 
+void init_ncurses_colors();
+
 #endif
