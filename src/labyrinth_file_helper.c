@@ -80,7 +80,7 @@ Labyrinth* load_from_file(const char* filename){ //TODO erreur si fichier corrom
 
     fscanf(file, "\n%d\n", &n_monster);
     lab->n_monsters = n_monster;
-    
+
     lab->monsters = malloc(sizeof(Monster)*lab->n_monsters);
     for (int i = 0; i < lab->n_monsters; i++){
         int m_column, m_row, m_type, m_penalty;
@@ -98,7 +98,7 @@ void ask_lab_size(int* row, int* column){
     while(!entreeValide){
         printf("\033[0;35mHauteur du labyrinth : \033[0;37m");
         scanf("%i", row);
-        while ((getchar()) != '\n'); //vider le buffer
+        empty_buffer();
         entreeValide = *row%2 == 1 ? 1 : 0;
         if(!entreeValide) printf(RED_HIGHLIGHT "Entrée invalide (doit être impair)" ENDCOLOR "\n");
     }
@@ -106,7 +106,7 @@ void ask_lab_size(int* row, int* column){
     while(!entreeValide){
         printf("\033[0;35mLargeur du labyrinth : \033[0;37m");
         scanf("%i", column);
-        while ((getchar()) != '\n'); //vider le buffer
+        empty_buffer();
         entreeValide = *column%2 == 1 ? 1 : 0;
         if(!entreeValide) printf(RED_HIGHLIGHT "Entrée invalide (doit être impair)"  ENDCOLOR "\n");
     }
@@ -119,7 +119,7 @@ void ask_difficulty(int* difficulty){
         if(scanf("%i", difficulty) == 1){ //scanf read an int
             entreeValide =(*difficulty == 0 || *difficulty == 1)? 1 : 0;
         }
-        while ((getchar()) != '\n'); //vider le buffer
+        empty_buffer();
         if(!entreeValide) printf(RED_HIGHLIGHT "Entrée invalide (Veuillez choisir entre 0 et 1" ENDCOLOR "\n");
     }
 }
@@ -129,7 +129,7 @@ void ask_lab_name(int size, char name[size]){
     while(!entreeValide){
         printf("\033[0;35mNom du labyrinth : \033[0;37m");
         scanf("%s", name);
-        while ((getchar()) != '\n'); //vider le buffer
+        empty_buffer();
         entreeValide = (int)strlen(name) > 0 && (int)strlen(name) < size ? 1 : 0;
         if(!entreeValide) printf(RED_HIGHLIGHT "Entrée invalide\n" ENDCOLOR);
     }

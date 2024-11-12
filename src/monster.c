@@ -60,7 +60,7 @@ void add_ghost(Labyrinth* lab) {
         random_row = rand() % lab->longueur;
         random_column = rand() % lab->largeur;
         pulled_cell = get_cell(*lab, random_row, random_column);
-    }while(pulled_cell == PLAYER && pulled_cell == EXIT && pulled_cell == CLOSED_EXIT);
+    }while(pulled_cell == ENTRY && pulled_cell == EXIT && pulled_cell == CLOSED_EXIT);
 
     Monster* new_ghost = create_ghost(random_row, random_column);
     lab->monsters[lab->n_monsters] = *new_ghost;
@@ -97,7 +97,7 @@ int move_ghost(Labyrinth* lab, Monster* monster) {
     int next_row = monster->current_row + d_row;
 
     int next_cell = get_cell(*lab, next_row, next_column);
-    if (next_cell != UNDEFINED && next_cell != EXIT && next_cell != CLOSED_EXIT && next_cell != PLAYER) { //can move
+    if (next_cell != UNDEFINED && next_cell != EXIT && next_cell != CLOSED_EXIT && next_cell != ENTRY) { //can move
         monster->current_row = next_row;
         monster->current_column = next_column;
     }
@@ -113,7 +113,7 @@ int move_troll( Labyrinth* lab, Monster* monster) { //TODO : l'empecher de trop 
     int next_row = monster->current_row + d_row;
 
     int next_cell = get_cell(*lab, next_row, next_column);
-    if (next_cell != UNDEFINED && next_cell != WALL && next_cell != EXIT && next_cell != CLOSED_EXIT && next_cell != PLAYER) { //can move
+    if (next_cell != UNDEFINED && next_cell != WALL && next_cell != EXIT && next_cell != CLOSED_EXIT && next_cell != ENTRY) { //can move
         monster->current_row = next_row;
         monster->current_column = next_column;
     }

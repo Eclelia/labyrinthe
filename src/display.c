@@ -15,7 +15,7 @@ void display_game(Labyrinth lab){
             if(cell_value > WALL){ //if not a wall
                 printf("%2d ", cell_value);
             }
-            else if(cell_value == PLAYER){ 
+            else if(cell_value == ENTRY){ 
                 printf(" o ");
             } 
             else if(cell_value == EXIT){
@@ -55,7 +55,7 @@ void display_game_square(Labyrinth lab){
             if(cell_value > WALL){ //if not a wall
                 printf("   ");
             }
-            else if(cell_value == PLAYER){ 
+            else if(cell_value == ENTRY){ 
                 printf(" o ");
             } 
             else if(cell_value == EXIT){ 
@@ -97,7 +97,7 @@ void display_game_with_player(Labyrinth lab, int column, int row, int wait){
             else if(cell_value > WALL){ //if not a wall
                 printf("   ");
             }
-            else if(cell_value == PLAYER){ // the player
+            else if(cell_value == ENTRY){ // the entry
                 printf(" o ");
             } 
             else if(cell_value == EXIT){ // the exit
@@ -163,7 +163,7 @@ void ncurses_display_game_state(Labyrinth lab, int column, int row, int score){ 
             int y = i;
             int x = j * 3;
 
-            if(cell_value > WALL || cell_value == PLAYER){ //if not a wall
+            if(cell_value > WALL || cell_value == ENTRY){ //if not a wall
                 mvprintw(y, x, "   ");
             }
             else if(cell_value == EXIT){ // the exit

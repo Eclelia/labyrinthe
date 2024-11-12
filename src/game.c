@@ -16,7 +16,7 @@ void handle_game(){
     do{
         display_menu();
         scanf("%d", &menu_choice);
-        while (getchar() != '\n'); //vider le buffer
+        empty_buffer();
 
         if(menu_choice == CREATE){
             loaded_lab = create_and_save(NAME_SIZE, loaded_lab_name);

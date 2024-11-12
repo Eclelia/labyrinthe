@@ -218,7 +218,7 @@ void unify_room_number(Labyrinth* labyrinth, int number_to_place, int number_to_
 }
 
 int make_labyrinth_playable(Labyrinth* labyrinth){
-    set_cell(labyrinth, STARTING_ROW, STARTING_COLUMN, PLAYER);
+    set_cell(labyrinth, STARTING_ROW, STARTING_COLUMN, ENTRY);
     set_cell(labyrinth, labyrinth->longueur -1 , labyrinth->largeur - 2, EXIT);
     return 0;
 }

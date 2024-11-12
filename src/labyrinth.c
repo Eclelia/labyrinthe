@@ -46,3 +46,7 @@ int get_nth_bonus(Labyrinth lab, int nth, int* row, int* column){
     }
     return found;
 }
+
+void empty_buffer(){
+    while ((getchar()) != '\n');
+}

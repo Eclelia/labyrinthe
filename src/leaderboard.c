@@ -100,7 +100,7 @@ void ask_player_name(int size, char name[size]){
     while(!entreeValide){
         printf("\033[0;35mQuel est votre nom ? \033[0;37m");
         scanf("%s", name);
-        while ((getchar()) != '\n'); //vider le buffer
+        empty_buffer();
         entreeValide = (int)strlen(name) > 0 && (int)strlen(name) < size ? 1 : 0;
         if(!entreeValide) printf(RED_HIGHLIGHT "Entrée invalide\n" ENDCOLOR);
     }

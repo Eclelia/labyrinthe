@@ -13,7 +13,7 @@ typedef enum{
     PATH = 1,
     WALL = 0,
     UNDEFINED = -10,
-    PLAYER = -1,
+    ENTRY = -1,
     EXIT = -2,
     CLOSED_EXIT = -3,
     KEY = -4,

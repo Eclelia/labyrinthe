@@ -29,4 +29,6 @@ int get_nth_bonus(Labyrinth lab, int nth, int* row, int* column);
 
 int set_cell(Labyrinth* lab, int i, int j, int value);
 
+void empty_buffer();
+
 #endif
