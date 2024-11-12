@@ -24,10 +24,9 @@ void save_into_file(Labyrinth lab, const char* filename){
         fprintf(file, "\n");
     }
 
-    fprintf(file, "%d\n", lab.n_monsters); //TODO tester quand y'a des monstres
+    fprintf(file, "%d\n", lab.n_monsters);
     for (int i = 0; i < lab.n_monsters; i++){
         Monster monster = lab.monsters[i];
-        printf("monstre n°%d: [%d %d] %d p=%d\n", i, monster.column, monster.row, monster.type, monster.penalty);
 
         fprintf(file, "%d %d %d %d\n", 
             monster.column, 

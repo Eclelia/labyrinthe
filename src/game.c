@@ -16,10 +16,10 @@ void handle_game(){
     do{
         display_menu();
         scanf("%d", &menu_choice);
-        while (getchar() != '\n');
+        while (getchar() != '\n'); //vider le buffer
 
         if(menu_choice == CREATE){
-            loaded_lab = create_and_save();
+            loaded_lab = create_and_save(NAME_SIZE, loaded_lab_name);
             menu_choice = MENU;
         }
         else if(menu_choice == LOAD){
@@ -37,10 +37,6 @@ void handle_game(){
                 printf(RED_HIGHLIGHT "Veuillez d'abord charger un labyrinthe" ENDCOLOR "\n");
             }
             else{
-                printf("n_mon : %d\n", loaded_lab->n_monsters);
-                for(int i = 0; i < loaded_lab->n_monsters; i++){
-                    printf("monstre n°%d: [%d %d] %d\n", i, loaded_lab->monsters[i].column, loaded_lab->monsters[i].row, loaded_lab->monsters[i].type);
-                }
                 play_labyrinth(*loaded_lab, loaded_lab_name);
             }
             menu_choice = MENU;
@@ -60,14 +56,13 @@ void handle_game(){
     free(loaded_lab);
 }
 
-Labyrinth* create_and_save(){
+Labyrinth* create_and_save(int size, char name[size]){
     int row;
     int column;
-    char name[NAME_SIZE];
     int difficulty;
 
     ask_lab_size(&row, &column);
-    ask_lab_name(NAME_SIZE, name);
+    ask_lab_name(size, name);
     ask_difficulty(&difficulty);
 
     Labyrinth* lab = init_labyrinth(row, column);
@@ -77,12 +72,17 @@ Labyrinth* create_and_save(){
 
     save_into_file(*lab, name);
 
+    Leaderboard* lb = init_leaderboard();
+    save_leaderboard(*lb, name);
+    destroy_leaderboard(lb);
+
     display_game_square(*lab); 
 
     return lab;
 }
 
 int play_labyrinth(Labyrinth loaded_lab, const char* lab_name){
+    printf("lab_name : %s\n", lab_name);
     Labyrinth* lab_copy = copy_labyrinth(loaded_lab);
     //initial player position
     int player_row = STARTING_ROW;
@@ -116,7 +116,9 @@ int play_labyrinth(Labyrinth loaded_lab, const char* lab_name){
             move_monsters(lab_copy);
 
             won = check_collision(lab_copy, next_y, next_x, &player_row, &player_column, &score, &found_key);
-        }
+        }    
+        ncurses_display_game_state(*lab_copy, player_column, player_row, score);
+
         if(won){ //won can change value in previous if
             clear();
             //TODO display_win (en mode ncurses)
@@ -126,6 +128,7 @@ int play_labyrinth(Labyrinth loaded_lab, const char* lab_name){
     } while ((ch = getch()) != ESCAPE); 
     endwin();
     system("clear");
+
     Leaderboard* lb = load_lb_from_file(lab_name);
     if(lb == NULL){
         printf(RED_HIGHLIGHT "Un problème s'est produit avec le classement." ENDCOLOR "\n");
@@ -133,7 +136,7 @@ int play_labyrinth(Labyrinth loaded_lab, const char* lab_name){
     else{
         char name[NAME_SIZE];
 
-        if(won){ //TODO need test
+        if(won){
             if(score > get_lowest_score(*lb)){
                 ask_player_name(NAME_SIZE, name);
                 add_player(lb, lab_name, name, score);
@@ -179,9 +182,6 @@ int check_collision(Labyrinth* lab, int next_y, int next_x, int* player_row, int
             *score += mon.penalty;
         }
     }
-
-    ncurses_display_game_state(*lab, *player_column, *player_row, *score);
-
     if(next_cell == EXIT && *found_key){
         return 1; //won
     }

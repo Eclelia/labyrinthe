@@ -82,7 +82,6 @@ void init_create_recursive_labyrinth_path(Labyrinth* labyrinth, int difficult){
     add_score_mecanics(labyrinth, lab_size/RATIO_BONUS, lab_size/RATIO_TRAP);
 
     if(difficult){
-        printf("pop\n");
         make_lab_unperfect(labyrinth);
         add_monsters(labyrinth);
     }
@@ -262,7 +261,6 @@ Labyrinth* copy_labyrinth(Labyrinth labyrinth){
             labyrinth.monsters[i].type, 
             labyrinth.monsters[i].penalty);
         copy->monsters[i] = *mon;
-        printf("monstre n°%d: [%d %d] %d\n", i, labyrinth.monsters[i].column, labyrinth.monsters[i].row, labyrinth.monsters[i].type);
     }
     return copy;
 }

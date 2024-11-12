@@ -60,7 +60,7 @@ Leaderboard* load_leaderboard(){
     return load_lb_from_file(name);
 }
 
-Leaderboard* load_lb_from_file(const char* filename){
+Leaderboard* load_lb_from_file(const char* filename){ //TODO erreur si fichier corrompu
     Leaderboard* loaded_lb = malloc(sizeof(Leaderboard));
 
     size_t total_size = strlen(DATA_PATH) + strlen(filename) + strlen(".score") + 1;

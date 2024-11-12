@@ -39,7 +39,6 @@ int get_nth_bonus(Labyrinth lab, int nth, int* row, int* column){
                 if(nb_bonuses == nth){
                     *row = i;
                     *column = j;
-                    printf("found %dth\n", nb_bonuses);
                     found = 1;
                 }
             }

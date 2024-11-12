@@ -42,9 +42,6 @@ void add_monsters(Labyrinth* lab) {
 
     int nb_monsters = nb_ghosts + nb_trolls;
 
-    printf("%d\n", nb_bonuses);
-    printf("%d\n", nb_trolls);
-
     lab->monsters = malloc(sizeof(Monster) * nb_monsters);
     
     for(int i = 0; i <nb_ghosts; i++){
@@ -53,10 +50,6 @@ void add_monsters(Labyrinth* lab) {
 
     for(int i = 0; i <nb_trolls; i++){
         add_troll(lab, nb_bonuses);
-    }
-
-    for(int i = 0; i < lab->n_monsters; i++){
-        printf("monstre n°%d: [%d %d] %d\n", i, lab->monsters[i].column, lab->monsters[i].row, lab->monsters[i].type);
     }
 }
 
@@ -74,7 +67,7 @@ void add_ghost(Labyrinth* lab) {
     lab->n_monsters = lab->n_monsters+1;
 }
 
-void add_troll(Labyrinth* lab, int nb_bonuses) { //TODO 2 trolls peuvent spawn sur le même bonus
+void add_troll(Labyrinth* lab, int nb_bonuses) {
     int nth_bonus = (rand() % nb_bonuses) +1;
 
     int bonus_row, bonus_column;
@@ -103,7 +96,7 @@ int move_ghost(Labyrinth* lab, Monster* monster) {
     int next_column = monster->current_column + d_column;
     int next_row = monster->current_row + d_row;
 
-    int next_cell = get_cell(*lab, next_row, next_column);//TODO check si bon ordre
+    int next_cell = get_cell(*lab, next_row, next_column);
     if (next_cell != UNDEFINED && next_cell != EXIT && next_cell != CLOSED_EXIT && next_cell != PLAYER) { //can move
         monster->current_row = next_row;
         monster->current_column = next_column;
@@ -119,7 +112,7 @@ int move_troll( Labyrinth* lab, Monster* monster) { //TODO : l'empecher de trop 
     int next_column = monster->current_column + d_column;
     int next_row = monster->current_row + d_row;
 
-    int next_cell = get_cell(*lab, next_row, next_column);  //TODO check si bon ordre
+    int next_cell = get_cell(*lab, next_row, next_column);
     if (next_cell != UNDEFINED && next_cell != WALL && next_cell != EXIT && next_cell != CLOSED_EXIT && next_cell != PLAYER) { //can move
         monster->current_row = next_row;
         monster->current_column = next_column;
