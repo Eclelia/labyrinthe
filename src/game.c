@@ -121,7 +121,6 @@ int play_labyrinth(Labyrinth loaded_lab, const char* lab_name){
         if(won){ //won can change value in previous if
             clear();
             display_win();
-            //mvprintw(0,0,"Vous avez gagné. Veuillez appuyer sur ESC pour continuer");
         }
 
     } while ((ch = getch()) != ESCAPE); 

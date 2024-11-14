@@ -267,7 +267,7 @@ void display_highscore_message(){
         "%s/_/ |_/\\___/|__/|__/  /_/ /_/_/\\__, /_/ /_/____/\\___/\\____/_/   \\___/  (_)   \n"
         "                              /____/                                         \n" ENDCOLOR, 
         animation_color[i+2], animation_color[i+1], animation_color[i]);
-        //usleep(250000);
+        usleep(250000);
     }
 }
 

@@ -9,7 +9,7 @@
 Leaderboard* init_leaderboard(){
     Leaderboard* new_lb = malloc(sizeof(Leaderboard));
     new_lb->nb_of_scores = 0;
-    new_lb->score_list = malloc(10*sizeof(P_score));
+    new_lb->score_list = malloc(LEADERBOARD_SIZE*sizeof(P_score));
     return new_lb;
 }
 
