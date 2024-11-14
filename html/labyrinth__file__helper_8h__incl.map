@@ -1,0 +1,6 @@
+<map id="include/labyrinth_file_helper.h" name="include/labyrinth_file_helper.h">
+<area shape="rect" id="node1" title="Contains functions for saving and loading labyrinth configurations to and from files." alt="" coords="5,5,164,47"/>
+<area shape="rect" id="node2" href="$labyrinth_8h.html" title="Functions to interact with and manipulate the labyrinth grid." alt="" coords="39,95,131,121"/>
+<area shape="rect" id="node3" href="$game__struct_8h_source.html" title=" " alt="" coords="27,244,142,271"/>
+<area shape="rect" id="node4" href="$monster_8h.html" title="Functions for creating, moving, and managing monsters in the labyrinth." alt="" coords="83,169,169,196"/>
+</map>

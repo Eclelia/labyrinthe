@@ -1,0 +1,6 @@
+<map id="include/labyrinth_creation.h" name="include/labyrinth_creation.h">
+<area shape="rect" id="node1" title="Functions for initializing, creating, and modifying labyrinth structures." alt="" coords="5,5,208,32"/>
+<area shape="rect" id="node2" href="$labyrinth_8h.html" title="Functions to interact with and manipulate the labyrinth grid." alt="" coords="61,80,153,107"/>
+<area shape="rect" id="node3" href="$game__struct_8h_source.html" title=" " alt="" coords="49,229,164,256"/>
+<area shape="rect" id="node4" href="$monster_8h.html" title="Functions for creating, moving, and managing monsters in the labyrinth." alt="" coords="105,155,191,181"/>
+</map>

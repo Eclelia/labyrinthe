@@ -2,6 +2,11 @@
  * @file monster.h
  * @brief Functions for creating, moving, and managing monsters in the labyrinth.
  */
+/**
+ * @author Alain Lebret <alain.lebret@ensicaen.fr>
+ * @version 1.0.0
+ * @date 13 septembre 2017
+ */
 
 #ifndef MONSTER_H
 #define MONSTER_H
