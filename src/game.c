@@ -136,7 +136,7 @@ int play_labyrinth(Labyrinth loaded_lab, const char* lab_name){
         char name[NAME_SIZE];
 
         if(won){
-            if(score > get_lowest_score(*lb)){
+            if(lb->nb_of_scores < 10 || score > get_lowest_score(*lb)){ //TODO : trouver pourquoi le message se display pas correctement/pas de highscore qd 2 scores
                 display_highscore_message();
                 ask_player_name(NAME_SIZE, name);
                 add_player(lb, lab_name, name, score);

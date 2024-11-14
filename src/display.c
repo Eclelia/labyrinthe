@@ -133,17 +133,22 @@ void display_game_with_player(Labyrinth lab, int column, int row, int wait){
     system("clear");
 }
 
-void ncurses_display_game_state(Labyrinth lab, int column, int row, int score){ //TODO mettre tout les init de ncurses ds une fonction à part ?
+void ncurses_display_game_state(Labyrinth lab, int column, int row, int score){
     clear();
     init_ncurses_colors();
 
+    int colonnes = 54;
+
+    int player_offset_column = (column > colonnes/2) ? column - (colonnes/2) : 0;
+    int player_offset_row = (row > (LINES/2)) ? row - (LINES/2) : 0;
+
     int i;
-    for(i = 0; i < lab.longueur; i++){
-        for (int j = 0; j < lab.largeur; j++){ 
+    for(i = player_offset_row; i < lab.longueur && i < LINES+player_offset_row; i++){
+        for (int j = player_offset_column; j < lab.largeur && j < colonnes+player_offset_column; j++){ 
             int cell_value = get_cell(lab, i, j);
 
-            int y = i;
-            int x = j * 3;
+            int y = i - player_offset_row;
+            int x = (j - player_offset_column) * 3;
 
             if(cell_value > WALL || cell_value == ENTRY){ //if not a wall
                 mvprintw(y, x, "   ");
@@ -183,15 +188,17 @@ void ncurses_display_game_state(Labyrinth lab, int column, int row, int score){ 
     //display monsters
     for(int k = 0; k < lab.n_monsters; k++){
         Monster mon = lab.monsters[k]; 
+        int m_row = mon.current_row - player_offset_row;
+        int m_column = (mon.current_column - player_offset_column)*3;
         switch (mon.type){
         case GHOST :
             attron(COLOR_PAIR(GHOST_PAIR));
-            mvprintw(mon.current_row, mon.current_column*3, "(\")");
+            mvprintw(m_row, m_column, "(\")");
             attroff(COLOR_PAIR(EXIT_PAIR));
             break;
         case TROLL :
             attron(COLOR_PAIR(TROLL_PAIR));
-            mvprintw(mon.current_row, mon.current_column*3, "'o'");
+            mvprintw(m_row, m_column, "'o'");
             attroff(COLOR_PAIR(EXIT_PAIR));
             break;
         default : 
@@ -203,11 +210,13 @@ void ncurses_display_game_state(Labyrinth lab, int column, int row, int score){ 
     }
     //display_player (so they're on top)
     attron(COLOR_PAIR(PLAYER_PAIR));
-    mvprintw(row, column*3, "   "); // Position du joueur
+    mvprintw(row - player_offset_row, (column - player_offset_column)*3, "   "); // Position du joueur
     attroff(COLOR_PAIR(PLAYER_PAIR));
 
     //display GUI
     display_GUI(score);
+
+    //mvprintw(LINES - 4, 0, "OFFSET_COL : %d\t OFFSET_LINE : %d \t COLS : %d \t LINES : %d", player_offset_column, player_offset_row, colonnes, LINES);
     refresh();
 }
 
@@ -258,12 +267,12 @@ void display_highscore_message(){
         "%s/_/ |_/\\___/|__/|__/  /_/ /_/_/\\__, /_/ /_/____/\\___/\\____/_/   \\___/  (_)   \n"
         "                              /____/                                         \n" ENDCOLOR, 
         animation_color[i+2], animation_color[i+1], animation_color[i]);
-        usleep(250000);
+        //usleep(250000);
     }
 }
 
 void display_leaderboard(Leaderboard lb){
-    system("clear");
+    //system("clear");
     printf(YELLOW
         "╔═════════════════════════════════════════════════════════════╗\n"
 	    "║_.~\"~._.~\"~._.~\"~._.~\"~._Leaderboard_.~\"~._.~\"~._.~\"~._.~\"~..║\n"
