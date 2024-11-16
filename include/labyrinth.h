@@ -54,8 +54,8 @@
  */
 struct Labyrinth{
     int* game;
-    int largeur; //TODO refacto les largeur en column
-    int longueur; //TODO refacto les longueur en row
+    int largeur;
+    int longueur;
     int n_monsters;
     Monster* monsters;
 };

@@ -1,7 +1,11 @@
 #ifndef GAME_STRUCT_H
 #define GAME_STRUCT_H
 
-#define DISPLAY_CREATION 0
+/**
+ * @def DISPLAY_CREATION
+ * @brief Display the creation of the labyrinth to the player.
+ */
+#define DISPLAY_CREATION 1
 
 typedef struct Monster Monster;
 typedef struct Labyrinth Labyrinth;

@@ -14,5 +14,6 @@ var searchData=
   ['display_5fhighscore_5fmessage_36',['display_highscore_message',['../display_8h.html#a12f2d22ad83d5a12eb4a0493035cb1e8',1,'display.h']]],
   ['display_5fleaderboard_37',['display_leaderboard',['../display_8h.html#a2ed9cb73975fd278b88adf3d61a54ee4',1,'display.h']]],
   ['display_5fmenu_38',['display_menu',['../display_8h.html#a39f5190c4bbb94c4d470854781e91105',1,'display.h']]],
-  ['display_5fwin_39',['display_win',['../display_8h.html#a6e697d7b7d9f964ad9a0fb8b106f59ce',1,'display.h']]]
+  ['display_5fwin_39',['display_win',['../display_8h.html#a6e697d7b7d9f964ad9a0fb8b106f59ce',1,'display.h']]],
+  ['distance_5ffrom_5fspawn_40',['distance_from_spawn',['../monster_8h.html#aa70cd994cd935a1e25b3503852c6ff63',1,'monster.h']]]
 ];

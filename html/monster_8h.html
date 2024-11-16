@@ -119,6 +119,10 @@ Macros</h2></td></tr>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="monster_8h.html#a730c590ac73d6608bfeac2fcb8dc1bd3">RATIO_TROLL</a>(nb_bonuses)&#160;&#160;&#160;(nb_bonuses/3)</td></tr>
 <tr class="memdesc:a730c590ac73d6608bfeac2fcb8dc1bd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the number of trolls based on the number of bonus cells. <br /></td></tr>
 <tr class="separator:a730c590ac73d6608bfeac2fcb8dc1bd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9764ab8bd5d37eccb017e5d4d65e1a7b"><td class="memItemLeft" align="right" valign="top"><a id="a9764ab8bd5d37eccb017e5d4d65e1a7b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="monster_8h.html#a9764ab8bd5d37eccb017e5d4d65e1a7b">MAX_DISTANCE_FROM_SPAWN</a>&#160;&#160;&#160;6</td></tr>
+<tr class="memdesc:a9764ab8bd5d37eccb017e5d4d65e1a7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">restricts troll movement : they can't go too far from their spawn. <br /></td></tr>
+<tr class="separator:a9764ab8bd5d37eccb017e5d4d65e1a7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -160,6 +164,9 @@ Functions</h2></td></tr>
 <tr class="memitem:aaf965ebb4db05eb58a2fa49cf77b7a58"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="monster_8h.html#aaf965ebb4db05eb58a2fa49cf77b7a58">move_troll</a> (<a class="el" href="structLabyrinth.html">Labyrinth</a> *lab, <a class="el" href="structMonster.html">Monster</a> *monster)</td></tr>
 <tr class="memdesc:aaf965ebb4db05eb58a2fa49cf77b7a58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves a troll monster in the labyrinth.  <a href="monster_8h.html#aaf965ebb4db05eb58a2fa49cf77b7a58">More...</a><br /></td></tr>
 <tr class="separator:aaf965ebb4db05eb58a2fa49cf77b7a58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa70cd994cd935a1e25b3503852c6ff63"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="monster_8h.html#aa70cd994cd935a1e25b3503852c6ff63">distance_from_spawn</a> (<a class="el" href="structMonster.html">Monster</a> monster, int next_row, int next_column)</td></tr>
+<tr class="memdesc:aa70cd994cd935a1e25b3503852c6ff63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the Manhattan distance from the monster's spawn location to a given cell in the labyrinth.  <a href="monster_8h.html#aa70cd994cd935a1e25b3503852c6ff63">More...</a><br /></td></tr>
+<tr class="separator:aa70cd994cd935a1e25b3503852c6ff63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a190f950142c0aadf7863af95e2e2f58a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="monster_8h.html#a190f950142c0aadf7863af95e2e2f58a">destroy_monster</a> (<a class="el" href="structMonster.html">Monster</a> *monster)</td></tr>
 <tr class="memdesc:a190f950142c0aadf7863af95e2e2f58a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys a monster and frees allocated memory.  <a href="monster_8h.html#a190f950142c0aadf7863af95e2e2f58a">More...</a><br /></td></tr>
 <tr class="separator:a190f950142c0aadf7863af95e2e2f58a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -454,6 +461,52 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="aa70cd994cd935a1e25b3503852c6ff63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa70cd994cd935a1e25b3503852c6ff63">&#9670;&nbsp;</a></span>distance_from_spawn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int distance_from_spawn </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structMonster.html">Monster</a>&#160;</td>
+          <td class="paramname"><em>monster</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>next_row</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>next_column</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculates the Manhattan distance from the monster's spawn location to a given cell in the labyrinth. </p>
+<p>The spawn location is defined by the <code>row</code> and <code>column</code> attributes of the <a class="el" href="structMonster.html" title="Represents a monster in the labyrinth.">Monster</a> struct. This function calculates the absolute difference in rows and columns between the spawn point and the target location <code>(next_row, next_column)</code>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">monster</td><td>A <a class="el" href="structMonster.html" title="Represents a monster in the labyrinth.">Monster</a> whose spawn location is used for the calculation. </td></tr>
+    <tr><td class="paramname">next_row</td><td>The row index of the target cell. </td></tr>
+    <tr><td class="paramname">next_column</td><td>The column index of the target cell. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int The Manhattan distance between the spawn location and the target cell. </dd></dl>
 
 </div>
 </div>
