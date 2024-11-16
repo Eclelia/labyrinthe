@@ -100,10 +100,10 @@ void display_game_with_player(Labyrinth lab, int column, int row, int wait){
             else if(cell_value == ENTRY){ // the entry
                 printf(" o ");
             } 
-            else if(cell_value == EXIT){ // the exit
+            else if(cell_value == EXIT){
                 printf("   ");
             } 
-            else if(cell_value == CLOSED_EXIT){ // the exit
+            else if(cell_value == CLOSED_EXIT){
                 printf("xxx");
             } 
             else if(cell_value == KEY){
@@ -153,7 +153,7 @@ void ncurses_display_game_state(Labyrinth lab, int column, int row, int score){
             if(cell_value > WALL || cell_value == ENTRY){ //if not a wall
                 mvprintw(y, x, "   ");
             }
-            else if(cell_value == EXIT){ // the exit
+            else if(cell_value == EXIT){
                 attron(COLOR_PAIR(EXIT_PAIR));
                 mvprintw(y, x, " E ");
                 attroff(COLOR_PAIR(EXIT_PAIR));
@@ -208,15 +208,13 @@ void ncurses_display_game_state(Labyrinth lab, int column, int row, int score){
             break;
         }
     }
-    //display_player (so they're on top)
+    //displayplayer so they're on top
     attron(COLOR_PAIR(PLAYER_PAIR));
-    mvprintw(row - player_offset_row, (column - player_offset_column)*3, "   "); // Position du joueur
+    mvprintw(row - player_offset_row, (column - player_offset_column)*3, "   "); // Player position
     attroff(COLOR_PAIR(PLAYER_PAIR));
 
     //display GUI
     display_GUI(score);
-
-    //mvprintw(LINES - 4, 0, "OFFSET_COL : %d\t OFFSET_LINE : %d \t COLS : %d \t LINES : %d", player_offset_column, player_offset_row, colonnes, LINES);
     refresh();
 }
 
@@ -272,7 +270,6 @@ void display_highscore_message(){
 }
 
 void display_leaderboard(Leaderboard lb){
-    //system("clear");
     printf(YELLOW
         "╔═════════════════════════════════════════════════════════════╗\n"
 	    "║_.~\"~._.~\"~._.~\"~._.~\"~._Leaderboard_.~\"~._.~\"~._.~\"~._.~\"~..║\n"
@@ -319,12 +316,12 @@ void init_ncurses_colors(){
     init_color(COLOR_DARK_CYAN,0, 372, 372);
 
     // Definition of ncurses color pairs
-    init_pair(PLAYER_PAIR, COLOR_WHITE, COLOR_BLUE);   // Joueur en surbrillance bleue
-    init_pair(WALL_PAIR, COLOR_WHITE, COLOR_WHITE);    // Mur blanc sur blanc
-    init_pair(EXIT_PAIR, COLOR_WHITE, COLOR_GREEN);    // Sortie sur fond vert
-    init_pair(KEY_PAIR, COLOR_YELLOW, -1);             // Key yellow on black
-    init_pair(BONUS_PAIR, COLOR_WHITE, COLOR_GREEN);   // Bonus in green
-    init_pair(TRAP_PAIR, COLOR_BLACK, COLOR_RED);      // Trap in red
+    init_pair(PLAYER_PAIR, COLOR_WHITE, COLOR_BLUE);    // Player in blue
+    init_pair(WALL_PAIR, COLOR_WHITE, COLOR_WHITE);     // White wall
+    init_pair(EXIT_PAIR, COLOR_WHITE, COLOR_GREEN);     // Exit in green
+    init_pair(KEY_PAIR, COLOR_YELLOW, -1);              // Key yellow on black
+    init_pair(BONUS_PAIR, COLOR_WHITE, COLOR_GREEN);    // Bonus in green
+    init_pair(TRAP_PAIR, COLOR_BLACK, COLOR_RED);       // Trap in red
     init_pair(TROLL_PAIR, COLOR_ORANGE, COLOR_DARK_RED);// Troll in orange
     init_pair(GHOST_PAIR, COLOR_CYAN, COLOR_DARK_CYAN); // Ghost in cyan
 }

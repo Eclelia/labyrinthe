@@ -92,14 +92,17 @@ Include dependency graph for leaderboard.h:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPlayer__score.html">Player_score</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents an individual player's score.  <a href="structPlayer__score.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structLeaderboard.html">Leaderboard</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the leaderboard, containing a list of player scores.  <a href="structLeaderboard.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a74f3cecfb9d0618b1636f9f2f2dee25c"><td class="memItemLeft" align="right" valign="top"><a id="a74f3cecfb9d0618b1636f9f2f2dee25c"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>LEADERBOARD_SIZE</b>&#160;&#160;&#160;10</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leaderboard_8h.html#a74f3cecfb9d0618b1636f9f2f2dee25c">LEADERBOARD_SIZE</a>&#160;&#160;&#160;10</td></tr>
+<tr class="memdesc:a74f3cecfb9d0618b1636f9f2f2dee25c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the number of scores stored for each labyrinth. <br /></td></tr>
 <tr class="separator:a74f3cecfb9d0618b1636f9f2f2dee25c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -137,9 +140,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a9f69788e6e05ea000e4bf9abc880a5f7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leaderboard_8h.html#a9f69788e6e05ea000e4bf9abc880a5f7">sort_player</a> (<a class="el" href="structLeaderboard.html">Leaderboard</a> *lb)</td></tr>
 <tr class="memdesc:a9f69788e6e05ea000e4bf9abc880a5f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sorts the leaderboard in descending order of scores.  <a href="leaderboard_8h.html#a9f69788e6e05ea000e4bf9abc880a5f7">More...</a><br /></td></tr>
 <tr class="separator:a9f69788e6e05ea000e4bf9abc880a5f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a6a4918e49646cdda09681d66cc44a9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leaderboard_8h.html#a1a6a4918e49646cdda09681d66cc44a9">compare_scores</a> (const void *player_a, const void *player_b)</td></tr>
-<tr class="memdesc:a1a6a4918e49646cdda09681d66cc44a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Comparison function for sorting player scores.  <a href="leaderboard_8h.html#a1a6a4918e49646cdda09681d66cc44a9">More...</a><br /></td></tr>
-<tr class="separator:a1a6a4918e49646cdda09681d66cc44a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a702a7c30f3c411c9fdec22a6f9049b4d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leaderboard_8h.html#a702a7c30f3c411c9fdec22a6f9049b4d">compare_scores</a> (const void *obj_a, const void *obj_b)</td></tr>
+<tr class="memdesc:a702a7c30f3c411c9fdec22a6f9049b4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Comparison function for sorting player scores.  <a href="leaderboard_8h.html#a702a7c30f3c411c9fdec22a6f9049b4d">More...</a><br /></td></tr>
+<tr class="separator:a702a7c30f3c411c9fdec22a6f9049b4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Functions for managing the leaderboard and player scores. </p>
@@ -234,8 +237,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a1a6a4918e49646cdda09681d66cc44a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1a6a4918e49646cdda09681d66cc44a9">&#9670;&nbsp;</a></span>compare_scores()</h2>
+<a id="a702a7c30f3c411c9fdec22a6f9049b4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a702a7c30f3c411c9fdec22a6f9049b4d">&#9670;&nbsp;</a></span>compare_scores()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -244,13 +247,13 @@ Functions</h2></td></tr>
           <td class="memname">int compare_scores </td>
           <td>(</td>
           <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>player_a</em>, </td>
+          <td class="paramname"><em>obj_a</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>player_b</em>&#160;</td>
+          <td class="paramname"><em>obj_b</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

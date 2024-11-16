@@ -1,6 +1,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 #include "leaderboard.h"
 #include "labyrinth_creation.h"
 #include "labyrinth_file_helper.h"
@@ -42,7 +43,7 @@ void save_leaderboard(Leaderboard lb, const char* filename){
     strcat(dest, filename);
     strcat(dest, ".score");
 
-    FILE * file = fopen(dest, "w");
+    FILE * file = fopen(dest, "w+");
 
     fprintf(file, "%d\n", lb.nb_of_scores);
     for(int i = 0; i < lb.nb_of_scores; i++){
@@ -60,7 +61,7 @@ Leaderboard* load_leaderboard(){
     return load_lb_from_file(name);
 }
 
-Leaderboard* load_lb_from_file(const char* filename){ //TODO erreur si fichier corrompu
+Leaderboard* load_lb_from_file(const char* filename){
     Leaderboard* loaded_lb = malloc(sizeof(Leaderboard));
 
     size_t total_size = strlen(DATA_PATH) + strlen(filename) + strlen(".score") + 1;
@@ -92,6 +93,7 @@ Leaderboard* load_lb_from_file(const char* filename){ //TODO erreur si fichier c
 }
 
 int get_lowest_score(Leaderboard lb){
+    if(lb.nb_of_scores == 0) return INT_MIN; 
     return lb.score_list[lb.nb_of_scores - 1].score;
 }
 
@@ -106,7 +108,6 @@ void ask_player_name(int size, char name[size]){
     }
 }
 
- //(en fonction de nb_of_scores et nb_of_score ++ si inf à 10)
  void add_player(Leaderboard* lb, const char* filename, const char* name, int score){
     P_score* p_score = init_player_score(name, score);
     if(lb->nb_of_scores < LEADERBOARD_SIZE){

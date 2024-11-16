@@ -6,6 +6,7 @@
 #include "labyrinth_creation.h"
 
 void save_into_file(Labyrinth lab, const char* filename){
+    //open the right file
     size_t total_size = strlen(DATA_PATH) + strlen(filename) + strlen(".cfg") + 1;
     char* dest = malloc(total_size);
 
@@ -34,7 +35,6 @@ void save_into_file(Labyrinth lab, const char* filename){
             monster.type, 
             monster.penalty);
     }
-
     fclose(file);
     free(dest);
 }
@@ -47,7 +47,7 @@ Labyrinth* load_lab(char* name_out){
     return load_from_file(name);
 }
 
-Labyrinth* load_from_file(const char* filename){ //TODO erreur si fichier corrompu
+Labyrinth* load_from_file(const char* filename){
     size_t total_size = strlen(DATA_PATH) + strlen(filename) + strlen(".cfg") + 1;
     char* dest = malloc(total_size);
 
@@ -56,13 +56,12 @@ Labyrinth* load_from_file(const char* filename){ //TODO erreur si fichier corrom
     strcat(dest, ".cfg");
 
     FILE * file = fopen(dest, "r");
+    if(file == NULL) return NULL;
     int longueur;
     int largeur;
     char nom[NAME_SIZE];
     int value;
     int n_monster;
-
-    if(file == NULL)return NULL;
 
     fscanf(file, "%d %d\n", &longueur, &largeur);
     Labyrinth* lab = init_labyrinth(longueur, largeur);

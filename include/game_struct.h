@@ -9,6 +9,12 @@ typedef struct Labyrinth_cell Lab_cell;
 typedef struct Leaderboard Leaderboard;
 typedef struct Player_score P_score;
 
+/**
+ * @enum CellType
+ * @brief Enumerates possible cell types in a labyrinth.
+ * 
+ * This enumeration categorizes each type of cell in the labyrinth based on its function or content.
+ */
 typedef enum{
     PATH = 1,
     WALL = 0,

@@ -23,7 +23,7 @@ void handle_game(){
             menu_choice = MENU;
         }
         else if(menu_choice == LOAD){
-            loaded_lab = load_lab(loaded_lab_name); //TODO proposer une liste des lab enregistré (les *.cfg)
+            loaded_lab = load_lab(loaded_lab_name); //TODO  propose a list of registered labs (the *.cfg files)
             if(loaded_lab == NULL){
                 printf(RED_HIGHLIGHT "Fichier non trouvé ou corrompu" ENDCOLOR "\n");
             }
@@ -135,7 +135,7 @@ int play_labyrinth(Labyrinth loaded_lab, const char* lab_name){
         char name[NAME_SIZE];
 
         if(won){
-            if(lb->nb_of_scores < 10 || score > get_lowest_score(*lb)){ //TODO : trouver pourquoi le message se display pas correctement/pas de highscore qd 2 scores
+            if(lb->nb_of_scores < 10 || score > get_lowest_score(*lb)){
                 display_highscore_message();
                 ask_player_name(NAME_SIZE, name);
                 add_player(lb, lab_name, name, score);
@@ -146,7 +146,7 @@ int play_labyrinth(Labyrinth loaded_lab, const char* lab_name){
     return 1;
 }
 
-int check_collision(Labyrinth* lab, int next_y, int next_x, int* player_row, int* player_column, int* score, int* found_key){ //TODO struct game_state ?
+int check_collision(Labyrinth* lab, int next_y, int next_x, int* player_row, int* player_column, int* score, int* found_key){ //TODO create a struct game_state
     int next_cell = get_cell(*lab, next_y, next_x); 
     if(next_y != *player_row || next_x != *player_column){ //position changed 
         if (next_cell != WALL && next_cell != UNDEFINED && next_cell != CLOSED_EXIT) { //can move
@@ -181,7 +181,7 @@ int check_collision(Labyrinth* lab, int next_y, int next_x, int* player_row, int
             *score += mon.penalty;
         }
     }
-    if(next_cell == EXIT && *found_key){
+    if(next_cell == EXIT){
         return 1; //won
     }
     return 0; //no event

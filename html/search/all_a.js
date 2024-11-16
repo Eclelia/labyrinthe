@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['play_5flabyrinth_70',['play_labyrinth',['../game_8h.html#aa68dcad280bbd9a17b0541f88dd78c70',1,'game.h']]],
-  ['player_5fscore_71',['Player_score',['../structPlayer__score.html',1,'']]],
-  ['pull_5fbreakable_5fwall_72',['pull_breakable_wall',['../labyrinth__creation_8h.html#a74b5206684d7024ccd5cf817d9921d51',1,'labyrinth_creation.h']]],
-  ['pull_5frandom_5fcell_73',['pull_random_cell',['../labyrinth__creation_8h.html#a132e07825f43f4fff905eb183b92643e',1,'labyrinth_creation.h']]],
-  ['pull_5frandom_5fempty_5fcell_74',['pull_random_empty_cell',['../labyrinth__creation_8h.html#a10b0dfcb30282403093960355600e925',1,'labyrinth_creation.h']]]
+  ['n_5fmonsters_86',['n_monsters',['../structLabyrinth.html#af81ffc012b621c7b9b10634d4d8feb3a',1,'Labyrinth']]],
+  ['name_87',['name',['../structPlayer__score.html#a5b649f153bf748b64252a9d08ec643cd',1,'Player_score']]],
+  ['name_5fsize_88',['NAME_SIZE',['../labyrinth__file__helper_8h.html#a834e9a379307f869a10f4da078be5786',1,'labyrinth_file_helper.h']]],
+  ['nb_5fof_5fscores_89',['nb_of_scores',['../structLeaderboard.html#adf2f8b54393dcf612dfe60d21c4605fa',1,'Leaderboard']]],
+  ['ncurses_5fdisplay_5fgame_5fstate_90',['ncurses_display_game_state',['../display_8h.html#a8864a5108feb3c90dfb067cae2d5b776',1,'display.h']]]
 ];

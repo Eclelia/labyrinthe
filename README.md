@@ -1,4 +1,4 @@
-# Labyrinth Game
+# Labyrinth Game //TODO add la doc de la variable display
 
 Welcome to **Labyrinth Game**, a maze-solving adventure where players navigate through challenging labyrinths, collect items, avoid traps, and try to set a high score! This game is built in C and uses the `ncurses` library for console-based graphics.
 

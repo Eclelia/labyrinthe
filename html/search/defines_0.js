@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ratio_5fghost_162',['RATIO_GHOST',['../monster_8h.html#abbb9c571c7bc836e32bed01d959e1b36',1,'monster.h']]]
+  ['bonus_213',['BONUS',['../game_8h.html#a96a9822fa134450197dd454b1478a193',1,'game.h']]]
 ];

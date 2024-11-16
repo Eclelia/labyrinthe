@@ -7,7 +7,11 @@
 #define FILE_HELPER_H
 
 #include "labyrinth.h"
-#define NAME_SIZE 255 //UNIX max authorized size for filename
+/** 
+ * @def NAME_SIZE
+ * @brief Defines the max lenght a name (by default : UNIX max authorized size for filename).
+ */
+#define NAME_SIZE 255
 
 /**
  * @brief Asks the user to input the size (height and width) of the labyrinth.

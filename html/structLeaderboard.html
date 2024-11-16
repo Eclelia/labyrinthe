@@ -68,25 +68,62 @@ $(function() {
 <div class="title">Leaderboard Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Represents the leaderboard, containing a list of player scores.  
+ <a href="structLeaderboard.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="leaderboard_8h_source.html">leaderboard.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for Leaderboard:</div>
 <div class="dyncontent">
 <div class="center"><img src="structLeaderboard__coll__graph.png" border="0" usemap="#aLeaderboard_coll__map" alt="Collaboration graph"/></div>
 <map name="aLeaderboard_coll__map" id="aLeaderboard_coll__map">
-<area shape="rect" title=" " alt="" coords="7,95,109,121"/>
-<area shape="rect" href="structPlayer__score.html" title=" " alt="" coords="5,5,111,32"/>
+<area shape="rect" title="Represents the leaderboard, containing a list of player scores." alt="" coords="7,95,109,121"/>
+<area shape="rect" href="structPlayer__score.html" title="Represents an individual player&#39;s score." alt="" coords="5,5,111,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:af54d738cb29adc6293737422d9317dc5"><td class="memItemLeft" align="right" valign="top"><a id="af54d738cb29adc6293737422d9317dc5"></a>
-<a class="el" href="structPlayer__score.html">P_score</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>score_list</b></td></tr>
-<tr class="separator:af54d738cb29adc6293737422d9317dc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a13a789c860f60a074c602cfb08e203a8"><td class="memItemLeft" align="right" valign="top"><a id="a13a789c860f60a074c602cfb08e203a8"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>nb_of_scores</b></td></tr>
-<tr class="separator:a13a789c860f60a074c602cfb08e203a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f2d635ca8463bdb35b3c0eb5c9f4a6a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structPlayer__score.html">P_score</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structLeaderboard.html#a6f2d635ca8463bdb35b3c0eb5c9f4a6a">score_list</a></td></tr>
+<tr class="separator:a6f2d635ca8463bdb35b3c0eb5c9f4a6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf2f8b54393dcf612dfe60d21c4605fa"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structLeaderboard.html#adf2f8b54393dcf612dfe60d21c4605fa">nb_of_scores</a></td></tr>
+<tr class="separator:adf2f8b54393dcf612dfe60d21c4605fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents the leaderboard, containing a list of player scores. </p>
+<p>The leaderboard keeps track of the top player scores and the total number of scores stored. </p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="adf2f8b54393dcf612dfe60d21c4605fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf2f8b54393dcf612dfe60d21c4605fa">&#9670;&nbsp;</a></span>nb_of_scores</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Leaderboard::nb_of_scores</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The current number of scores stored in the leaderboard. </p>
+
+</div>
+</div>
+<a id="a6f2d635ca8463bdb35b3c0eb5c9f4a6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f2d635ca8463bdb35b3c0eb5c9f4a6a">&#9670;&nbsp;</a></span>score_list</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Leaderboard::score_list</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>A dynamically allocated array of <code>P_score</code> structures, representing the top scores. </p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>include/<a class="el" href="leaderboard_8h_source.html">leaderboard.h</a></li>
 </ul>

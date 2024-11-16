@@ -37,7 +37,7 @@ void move_monsters(Labyrinth* lab) {
 
 void add_monsters(Labyrinth* lab) {
     int nb_ghosts = (lab->largeur * lab->longueur)/RATIO_GHOST;
-    int nb_bonuses = get_nb_bonus(*lab); //TODO calculer avec la taille du lab comme c'est size/ratio_bonus = + efficace
+    int nb_bonuses = get_nb_bonus(*lab);
     int nb_trolls = RATIO_TROLL(nb_bonuses);
 
     int nb_monsters = nb_ghosts + nb_trolls;

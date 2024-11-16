@@ -5,14 +5,53 @@
 
 #ifndef LABYRINTH_H
 #define LABYRINTH_H
+/** 
+ * @def LARGEUR
+ * @brief Defines the default width (number of columns) of the labyrinth grid.
+ */
 #define LARGEUR 11
+/** 
+ * @def LONGUEUR
+ * @brief Defines the default height (number of rows) of the labyrinth grid.
+ */
 #define LONGUEUR 25
+/** 
+ * @def STARTING_ROW
+ * @brief Defines the starting row position for the player in the labyrinth.
+ */
 #define STARTING_ROW 0
+/** 
+ * @def STARTING_COLUMN
+ * @brief Defines the starting column position for the player in the labyrinth.
+ */
 #define STARTING_COLUMN 1
 
 #include "game_struct.h"
 #include "monster.h"
 
+/**
+ * @struct Labyrinth
+ * @brief Represents the labyrinth structure.
+ * 
+ * The `Labyrinth` structure contains the grid data, its dimensions, and information about 
+ * monsters present in the labyrinth.
+ * 
+ * @var Labyrinth::game
+ * A pointer to a dynamically allocated 1D array representing the labyrinth grid.
+ * The values represent cell types based on the `CellType` enumeration.
+ * 
+ * @var Labyrinth::largeur
+ * The number of columns (width) in the labyrinth grid.
+ * 
+ * @var Labyrinth::longueur
+ * The number of rows (height) in the labyrinth grid.
+ * 
+ * @var Labyrinth::n_monsters
+ * The total number of monsters present in the labyrinth.
+ * 
+ * @var Labyrinth::monsters
+ * A pointer to a dynamically allocated array of `Monster` structures representing the monsters.
+ */
 struct Labyrinth{
     int* game;
     int largeur; //TODO refacto les largeur en column
@@ -21,6 +60,18 @@ struct Labyrinth{
     Monster* monsters;
 };
 
+/**
+ * @struct Labyrinth_cell
+ * @brief Represents a specific cell in the labyrinth grid.
+ * 
+ * This structure provides the row and column coordinates of a cell within the labyrinth.
+ * 
+ * @var Labyrinth_cell::row
+ * The row index of the cell.
+ * 
+ * @var Labyrinth_cell::column
+ * The column index of the cell.
+ */
 struct Labyrinth_cell{
     int row;
     int column;

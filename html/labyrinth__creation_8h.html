@@ -93,16 +93,20 @@ Include dependency graph for labyrinth_creation.h:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a14fdb97dd02ccebdfa6e42b1e73f42af"><td class="memItemLeft" align="right" valign="top"><a id="a14fdb97dd02ccebdfa6e42b1e73f42af"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>RATIO_WALL_TO_BREAK</b>&#160;&#160;&#160;65</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="labyrinth__creation_8h.html#a14fdb97dd02ccebdfa6e42b1e73f42af">RATIO_WALL_TO_BREAK</a>&#160;&#160;&#160;65</td></tr>
+<tr class="memdesc:a14fdb97dd02ccebdfa6e42b1e73f42af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Percentage of walls to be broken during labyrinth generation. <br /></td></tr>
 <tr class="separator:a14fdb97dd02ccebdfa6e42b1e73f42af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6860eecd82603ad9c7d5d625bc7bb611"><td class="memItemLeft" align="right" valign="top"><a id="a6860eecd82603ad9c7d5d625bc7bb611"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>RATIO_BONUS</b>&#160;&#160;&#160;32</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="labyrinth__creation_8h.html#a6860eecd82603ad9c7d5d625bc7bb611">RATIO_BONUS</a>&#160;&#160;&#160;32</td></tr>
+<tr class="memdesc:a6860eecd82603ad9c7d5d625bc7bb611"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ratio used to determine the number of bonus cells in the labyrinth. <br /></td></tr>
 <tr class="separator:a6860eecd82603ad9c7d5d625bc7bb611"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae176f935b477f281a3a7cde2427d3ae2"><td class="memItemLeft" align="right" valign="top"><a id="ae176f935b477f281a3a7cde2427d3ae2"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>RATIO_TRAP</b>&#160;&#160;&#160;RATIO_BONUS/2</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="labyrinth__creation_8h.html#ae176f935b477f281a3a7cde2427d3ae2">RATIO_TRAP</a>&#160;&#160;&#160;<a class="el" href="labyrinth__creation_8h.html#a6860eecd82603ad9c7d5d625bc7bb611">RATIO_BONUS</a>/2</td></tr>
+<tr class="memdesc:ae176f935b477f281a3a7cde2427d3ae2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ratio used to determine the number of trap cells in the labyrinth. <br /></td></tr>
 <tr class="separator:ae176f935b477f281a3a7cde2427d3ae2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac26a668e32beeb7eae8b6e4adbe5d1e1"><td class="memItemLeft" align="right" valign="top"><a id="ac26a668e32beeb7eae8b6e4adbe5d1e1"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>DATA_PATH</b>&#160;&#160;&#160;&quot;data/&quot;</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="labyrinth__creation_8h.html#ac26a668e32beeb7eae8b6e4adbe5d1e1">DATA_PATH</a>&#160;&#160;&#160;&quot;data/&quot;</td></tr>
+<tr class="memdesc:ac26a668e32beeb7eae8b6e4adbe5d1e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default path for storing and retrieving labyrinth and leaderboard files. <br /></td></tr>
 <tr class="separator:ac26a668e32beeb7eae8b6e4adbe5d1e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -232,7 +236,7 @@ Functions</h2></td></tr>
 <p>Randomly places objects of a specified type in the labyrinth.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">lab</td><td>Pointer to the labyrinth structure. </td></tr>
+    <tr><td class="paramname">labyrinth</td><td>Pointer to the labyrinth structure. </td></tr>
     <tr><td class="paramname">nb_objet</td><td>Number of objects to place. </td></tr>
     <tr><td class="paramname">object_to_place</td><td>The type of object to place (TRAP_CELL, BONUS_CELL, etc).</td></tr>
   </table>

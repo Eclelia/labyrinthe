@@ -103,34 +103,31 @@ $(function() {
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#define GHOST_PAIR 7</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#define TROLL_PAIR 8</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#define WIN_PAIR 9</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#define COLOR_DARK_RED COLOR_WHITE+1</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#define COLOR_DARK_CYAN COLOR_WHITE+2</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#define COLOR_ORANGE COLOR_WHITE+3</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">//TODO modifier tous les display pour qu&#39;elles prennent en compte l&#39;array de monstre</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="display_8h.html#a02c5d22dc9e87560763fe72abd79f3de">   61</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="display_8h.html#a02c5d22dc9e87560763fe72abd79f3de">display_game</a>(<a class="code" href="structLabyrinth.html">Labyrinth</a> lab);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="display_8h.html#a21f4f90e92d04de02cb8bf858ac37c80">   73</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="display_8h.html#a21f4f90e92d04de02cb8bf858ac37c80">display_game_square</a>(<a class="code" href="structLabyrinth.html">Labyrinth</a> lab);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="display_8h.html#af8520090c64302aaab7c9d430622e14d">   89</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="display_8h.html#af8520090c64302aaab7c9d430622e14d">display_game_with_player</a>(<a class="code" href="structLabyrinth.html">Labyrinth</a> lab, <span class="keywordtype">int</span> column, <span class="keywordtype">int</span> row, <span class="keywordtype">int</span> wait);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="display_8h.html#a8864a5108feb3c90dfb067cae2d5b776">  105</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="display_8h.html#a8864a5108feb3c90dfb067cae2d5b776">ncurses_display_game_state</a>(<a class="code" href="structLabyrinth.html">Labyrinth</a> lab, <span class="keywordtype">int</span> column, <span class="keywordtype">int</span> row, <span class="keywordtype">int</span> score);</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
-<div class="line"><a name="l00112"></a><span class="lineno"><a class="line" href="display_8h.html#a39f5190c4bbb94c4d470854781e91105">  112</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="display_8h.html#a39f5190c4bbb94c4d470854781e91105">display_menu</a>();</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="line"><a name="l00121"></a><span class="lineno"><a class="line" href="display_8h.html#a6e697d7b7d9f964ad9a0fb8b106f59ce">  121</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="display_8h.html#a6e697d7b7d9f964ad9a0fb8b106f59ce">display_win</a>();</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="display_8h.html#a12f2d22ad83d5a12eb4a0493035cb1e8">  128</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="display_8h.html#a12f2d22ad83d5a12eb4a0493035cb1e8">display_highscore_message</a>();</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
-<div class="line"><a name="l00137"></a><span class="lineno"><a class="line" href="display_8h.html#a2ed9cb73975fd278b88adf3d61a54ee4">  137</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="display_8h.html#a2ed9cb73975fd278b88adf3d61a54ee4">display_leaderboard</a>(<a class="code" href="structLeaderboard.html">Leaderboard</a> lb);</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
-<div class="line"><a name="l00149"></a><span class="lineno"><a class="line" href="display_8h.html#a7e7a368ddb68127c990d28aad5a8f29f">  149</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="display_8h.html#a7e7a368ddb68127c990d28aad5a8f29f">display_GUI</a>(<span class="keywordtype">int</span> score);</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
-<div class="line"><a name="l00159"></a><span class="lineno"><a class="line" href="display_8h.html#a42df198d2a38d490002bf025926eb62b">  159</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="display_8h.html#a42df198d2a38d490002bf025926eb62b">init_ncurses_colors</a>();</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#define COLOR_DARK_RED COLOR_WHITE+1</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#define COLOR_DARK_CYAN COLOR_WHITE+2</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#define COLOR_ORANGE COLOR_WHITE+3</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="display_8h.html#a02c5d22dc9e87560763fe72abd79f3de">   58</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="display_8h.html#a02c5d22dc9e87560763fe72abd79f3de">display_game</a>(<a class="code" href="structLabyrinth.html">Labyrinth</a> lab);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="display_8h.html#a21f4f90e92d04de02cb8bf858ac37c80">   70</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="display_8h.html#a21f4f90e92d04de02cb8bf858ac37c80">display_game_square</a>(<a class="code" href="structLabyrinth.html">Labyrinth</a> lab);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="display_8h.html#af8520090c64302aaab7c9d430622e14d">   86</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="display_8h.html#af8520090c64302aaab7c9d430622e14d">display_game_with_player</a>(<a class="code" href="structLabyrinth.html">Labyrinth</a> lab, <span class="keywordtype">int</span> column, <span class="keywordtype">int</span> row, <span class="keywordtype">int</span> wait);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="display_8h.html#a8864a5108feb3c90dfb067cae2d5b776">  102</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="display_8h.html#a8864a5108feb3c90dfb067cae2d5b776">ncurses_display_game_state</a>(<a class="code" href="structLabyrinth.html">Labyrinth</a> lab, <span class="keywordtype">int</span> column, <span class="keywordtype">int</span> row, <span class="keywordtype">int</span> score);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="display_8h.html#a39f5190c4bbb94c4d470854781e91105">  109</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="display_8h.html#a39f5190c4bbb94c4d470854781e91105">display_menu</a>();</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno"><a class="line" href="display_8h.html#a6e697d7b7d9f964ad9a0fb8b106f59ce">  118</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="display_8h.html#a6e697d7b7d9f964ad9a0fb8b106f59ce">display_win</a>();</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="display_8h.html#a12f2d22ad83d5a12eb4a0493035cb1e8">  125</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="display_8h.html#a12f2d22ad83d5a12eb4a0493035cb1e8">display_highscore_message</a>();</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
+<div class="line"><a name="l00134"></a><span class="lineno"><a class="line" href="display_8h.html#a2ed9cb73975fd278b88adf3d61a54ee4">  134</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="display_8h.html#a2ed9cb73975fd278b88adf3d61a54ee4">display_leaderboard</a>(<a class="code" href="structLeaderboard.html">Leaderboard</a> lb);</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
+<div class="line"><a name="l00146"></a><span class="lineno"><a class="line" href="display_8h.html#a7e7a368ddb68127c990d28aad5a8f29f">  146</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="display_8h.html#a7e7a368ddb68127c990d28aad5a8f29f">display_GUI</a>(<span class="keywordtype">int</span> score);</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
+<div class="line"><a name="l00156"></a><span class="lineno"><a class="line" href="display_8h.html#a42df198d2a38d490002bf025926eb62b">  156</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="display_8h.html#a42df198d2a38d490002bf025926eb62b">init_ncurses_colors</a>();</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="adisplay_8h_html_a02c5d22dc9e87560763fe72abd79f3de"><div class="ttname"><a href="display_8h.html#a02c5d22dc9e87560763fe72abd79f3de">display_game</a></div><div class="ttdeci">void display_game(Labyrinth lab)</div><div class="ttdoc">Displays the current state of the labyrinth.</div></div>
 <div class="ttc" id="adisplay_8h_html_a12f2d22ad83d5a12eb4a0493035cb1e8"><div class="ttname"><a href="display_8h.html#a12f2d22ad83d5a12eb4a0493035cb1e8">display_highscore_message</a></div><div class="ttdeci">void display_highscore_message()</div><div class="ttdoc">Displays a high score animation on the terminal.</div></div>
 <div class="ttc" id="adisplay_8h_html_a21f4f90e92d04de02cb8bf858ac37c80"><div class="ttname"><a href="display_8h.html#a21f4f90e92d04de02cb8bf858ac37c80">display_game_square</a></div><div class="ttdeci">void display_game_square(Labyrinth lab)</div><div class="ttdoc">Displays the labyrinth as a grid of uniform cells.</div></div>
@@ -142,8 +139,8 @@ $(function() {
 <div class="ttc" id="adisplay_8h_html_a8864a5108feb3c90dfb067cae2d5b776"><div class="ttname"><a href="display_8h.html#a8864a5108feb3c90dfb067cae2d5b776">ncurses_display_game_state</a></div><div class="ttdeci">void ncurses_display_game_state(Labyrinth lab, int column, int row, int score)</div><div class="ttdoc">Displays the game state in ncurses mode, including player position, monsters, score and GUI.</div></div>
 <div class="ttc" id="adisplay_8h_html_af8520090c64302aaab7c9d430622e14d"><div class="ttname"><a href="display_8h.html#af8520090c64302aaab7c9d430622e14d">display_game_with_player</a></div><div class="ttdeci">void display_game_with_player(Labyrinth lab, int column, int row, int wait)</div><div class="ttdoc">Displays the labyrinth with the player's current position.</div></div>
 <div class="ttc" id="alabyrinth_8h_html"><div class="ttname"><a href="labyrinth_8h.html">labyrinth.h</a></div><div class="ttdoc">Functions to interact with and manipulate the labyrinth grid.</div></div>
-<div class="ttc" id="astructLabyrinth_html"><div class="ttname"><a href="structLabyrinth.html">Labyrinth</a></div><div class="ttdef"><b>Definition:</b> labyrinth.h:16</div></div>
-<div class="ttc" id="astructLeaderboard_html"><div class="ttname"><a href="structLeaderboard.html">Leaderboard</a></div><div class="ttdef"><b>Definition:</b> leaderboard.h:17</div></div>
+<div class="ttc" id="astructLabyrinth_html"><div class="ttname"><a href="structLabyrinth.html">Labyrinth</a></div><div class="ttdoc">Represents the labyrinth structure.</div><div class="ttdef"><b>Definition:</b> labyrinth.h:55</div></div>
+<div class="ttc" id="astructLeaderboard_html"><div class="ttname"><a href="structLeaderboard.html">Leaderboard</a></div><div class="ttdoc">Represents the leaderboard, containing a list of player scores.</div><div class="ttdef"><b>Definition:</b> leaderboard.h:45</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

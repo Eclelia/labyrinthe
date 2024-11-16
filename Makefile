@@ -10,8 +10,8 @@ labyrinth: $(BIN_F)/main.o $(BIN_F)/labyrinth_creation.o $(BIN_F)/display.o $(BI
 	mkdir -p $(DATA_DIR)
 	gcc $^ -o $@ -lm -lncurses -lc
 
-test_labyrinth: $(BIN_F)/test_labyrinth.o
-	gcc $^ -o $@ -lm
+test_labyrinth: $(BIN_F)/test_labyrinth.o $(BIN_F)/labyrinth_creation.o $(BIN_F)/display.o $(BIN_F)/labyrinth.o $(BIN_F)/game.o $(BIN_F)/labyrinth_file_helper.o $(BIN_F)/leaderboard.o $(BIN_F)/monster.o include/game_struct.h
+	gcc $^ -o $@ -lm -lncurses -lc
 
 $(BIN_F)/test_labyrinth.o: src/test/test_labyrinth.c
 	gcc $(CFLAGS) $(CPPFLAGS) $< -c -o $@

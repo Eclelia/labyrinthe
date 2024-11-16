@@ -2,25 +2,56 @@
  * @file monster.h
  * @brief Functions for creating, moving, and managing monsters in the labyrinth.
  */
-/**
- * @author Alain Lebret <alain.lebret@ensicaen.fr>
- * @version 1.0.0
- * @date 13 septembre 2017
- */
 
 #ifndef MONSTER_H
 #define MONSTER_H
 
 #include "game_struct.h"
 
+/** 
+ * @def RATIO_GHOST
+ * @brief Determines the ratio for ghost generation in the labyrinth.
+ */
 #define RATIO_GHOST 65
+/**  
+ * @def RATIO_TROLL(nb_bonuses)
+ * @brief Calculates the number of trolls based on the number of bonus cells.
+ */
 #define RATIO_TROLL(nb_bonuses) (nb_bonuses/3) 
 
+/**
+ * @enum Penality
+ * @brief Enumerates the penalties associated with different monster types.
+ */
 typedef enum{
     GHOST_P = -10,
     TROLL_P = -10,
 } Penality;
 
+/**
+ * @struct Monster
+ * @brief Represents a monster in the labyrinth.
+ * 
+ * The structure defines the position, type, and penalty associated with a monster in the labyrinth.
+ * 
+ * @var Monster::column
+ * The initial column position of the monster in the labyrinth.
+ * 
+ * @var Monster::row
+ * The initial row position of the monster in the labyrinth.
+ * 
+ * @var Monster::current_column
+ * The current column position of the monster in the labyrinth.
+ * 
+ * @var Monster::current_row
+ * The current row position of the monster in the labyrinth.
+ * 
+ * @var Monster::type
+ * The type of the monster, defined as a CellType (e.g., GHOST or TROLL).
+ * 
+ * @var Monster::penalty
+ * The penalty associated with the monster, defined as a Penality (e.g., GHOST_P or TROLL_P).
+ */
 struct Monster{
     int column;
     int row;

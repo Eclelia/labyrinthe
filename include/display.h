@@ -39,12 +39,9 @@
 #define GHOST_PAIR 7
 #define TROLL_PAIR 8
 #define WIN_PAIR 9
-
 #define COLOR_DARK_RED COLOR_WHITE+1
 #define COLOR_DARK_CYAN COLOR_WHITE+2
 #define COLOR_ORANGE COLOR_WHITE+3
-
-//TODO modifier tous les display pour qu'elles prennent en compte l'array de monstre
 
 /**
  * @brief Displays the current state of the labyrinth.

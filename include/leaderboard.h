@@ -6,14 +6,42 @@
 #ifndef LEADERBOARD_H
 #define LEADERBOARD_H
 
+/** 
+ * @def LEADERBOARD_SIZE
+ * @brief Determines the number of scores stored for each labyrinth.
+ */
 #define LEADERBOARD_SIZE 10
 #include "game_struct.h"
 
+/**
+ * @struct Player_score
+ * @brief Represents an individual player's score.
+ * 
+ * This structure contains the player's name and their associated score.
+ * 
+ * @var Player_score::name
+ * The name of the player, stored as a dynamically allocated string.
+ * 
+ * @var Player_score::score
+ * The score achieved by the player in the game.
+ */
 struct Player_score{
     char* name;
     int score;
 };
 
+/**
+ * @struct Leaderboard
+ * @brief Represents the leaderboard, containing a list of player scores.
+ * 
+ * The leaderboard keeps track of the top player scores and the total number of scores stored.
+ * 
+ * @var Leaderboard::score_list
+ * A dynamically allocated array of `P_score` structures, representing the top scores.
+ * 
+ * @var Leaderboard::nb_of_scores
+ * The current number of scores stored in the leaderboard.
+ */
 struct Leaderboard{
     P_score* score_list;
     int nb_of_scores;
@@ -152,6 +180,6 @@ void sort_player(Leaderboard* lb);
  * @return A negative integer if obj_a's score is less than obj_b's score,
  *         a positive integer if obj_a's score is greater, or 0 if they are equal.
  */
-int compare_scores(const void *player_a, const void *player_b);
+int compare_scores(const void *obj_a, const void *obj_b);
 
 #endif

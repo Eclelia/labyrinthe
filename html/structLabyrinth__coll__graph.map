@@ -1,4 +1,4 @@
 <map id="Labyrinth" name="Labyrinth">
-<area shape="rect" id="node1" title=" " alt="" coords="5,95,88,121"/>
-<area shape="rect" id="node2" href="$structMonster.html" title=" " alt="" coords="9,5,84,32"/>
+<area shape="rect" id="node1" title="Represents the labyrinth structure." alt="" coords="5,95,88,121"/>
+<area shape="rect" id="node2" href="$structMonster.html" title="Represents a monster in the labyrinth." alt="" coords="9,5,84,32"/>
 </map>

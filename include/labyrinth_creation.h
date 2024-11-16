@@ -7,10 +7,25 @@
 #define LABYRINTH_CREATION_H
 #include "labyrinth.h"
 
+/** 
+ * @def RATIO_WALL_TO_BREAK
+ * @brief Percentage of walls to be broken during labyrinth generation.
+ */
 #define RATIO_WALL_TO_BREAK 65
+/** 
+ * @def RATIO_BONUS
+ * @brief Ratio used to determine the number of bonus cells in the labyrinth.
+ */
 #define RATIO_BONUS 32
+/** 
+ * @def RATIO_TRAP
+ * @brief Ratio used to determine the number of trap cells in the labyrinth.
+ */
 #define RATIO_TRAP RATIO_BONUS/2
-
+/** 
+ * @def DATA_PATH
+ * @brief Default path for storing and retrieving labyrinth and leaderboard files.
+ */
 #define DATA_PATH "data/"
 
 /**
@@ -219,7 +234,7 @@ void add_key_and_lock_door(Labyrinth* labyrinth);
  * 
  * Randomly places objects of a specified type in the labyrinth.
  * 
- * @param lab Pointer to the labyrinth structure.
+ * @param labyrinth Pointer to the labyrinth structure.
  * @param nb_objet Number of objects to place.
  * @param object_to_place The type of object to place (TRAP_CELL, BONUS_CELL, etc).
  * 

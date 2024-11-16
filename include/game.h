@@ -8,11 +8,34 @@
 #define GAME_H
 #include "labyrinth.h"
 
+/** 
+ * @def DEFAULT_SCORE
+ * @brief The initial score for a player at the start of the game.
+ */
 #define DEFAULT_SCORE 1000 
+/** 
+ * @def BONUS
+ * @brief The score increment for collecting a bonus cell.
+ */
 #define BONUS 50
+/** 
+ * @def MALUS
+ * @brief The score decrement for encountering a trap cell.
+ */
 #define MALUS -50
+/** 
+ * @def MOVING_COST
+ * @brief The score penalty for each movement.
+ */
 #define MOVING_COST 10
 
+/**
+ * @enum Movement
+ * @brief Represents the player's possible movement directions and controls.
+ * 
+ * The movement keys are mapped to keyboard characters for user input, 
+ * with support for both lowercase and uppercase keys.
+ */
 typedef enum{
     UP = 'z',
     DOWN = 's',
@@ -25,6 +48,10 @@ typedef enum{
     ESCAPE = 27,
 } Movement;
 
+/**
+ * @enum GameOption
+ * @brief Represents the various states or options available in the game menu.
+ */
 typedef enum{
     MENU,
     CREATE,

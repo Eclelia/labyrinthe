@@ -1,16 +1,16 @@
 var searchData=
 [
-  ['destroy_5flabyrinth_21',['destroy_labyrinth',['../labyrinth__creation_8h.html#abec349b4403ec3b27ba2757557449529',1,'labyrinth_creation.h']]],
-  ['destroy_5fleaderboard_22',['destroy_leaderboard',['../leaderboard_8h.html#a4c3323527d0175052591814f7bf46620',1,'leaderboard.h']]],
-  ['destroy_5fmonster_23',['destroy_monster',['../monster_8h.html#a190f950142c0aadf7863af95e2e2f58a',1,'monster.h']]],
-  ['destroy_5fplayer_5fscore_24',['destroy_player_score',['../leaderboard_8h.html#acdf3428d5159ad6b62b35a545eca3021',1,'leaderboard.h']]],
-  ['display_2eh_25',['display.h',['../display_8h.html',1,'']]],
-  ['display_5fgame_26',['display_game',['../display_8h.html#a02c5d22dc9e87560763fe72abd79f3de',1,'display.h']]],
-  ['display_5fgame_5fsquare_27',['display_game_square',['../display_8h.html#a21f4f90e92d04de02cb8bf858ac37c80',1,'display.h']]],
-  ['display_5fgame_5fwith_5fplayer_28',['display_game_with_player',['../display_8h.html#af8520090c64302aaab7c9d430622e14d',1,'display.h']]],
-  ['display_5fgui_29',['display_GUI',['../display_8h.html#a7e7a368ddb68127c990d28aad5a8f29f',1,'display.h']]],
-  ['display_5fhighscore_5fmessage_30',['display_highscore_message',['../display_8h.html#a12f2d22ad83d5a12eb4a0493035cb1e8',1,'display.h']]],
-  ['display_5fleaderboard_31',['display_leaderboard',['../display_8h.html#a2ed9cb73975fd278b88adf3d61a54ee4',1,'display.h']]],
-  ['display_5fmenu_32',['display_menu',['../display_8h.html#a39f5190c4bbb94c4d470854781e91105',1,'display.h']]],
-  ['display_5fwin_33',['display_win',['../display_8h.html#a6e697d7b7d9f964ad9a0fb8b106f59ce',1,'display.h']]]
+  ['check_5fcollision_12',['check_collision',['../game_8h.html#a3f550d11cf583c1407158973bfb1eb45',1,'game.h']]],
+  ['choose_5fdirection_13',['choose_direction',['../monster_8h.html#a105518b924e5e70e3415f041a5b6ad65',1,'monster.h']]],
+  ['column_14',['column',['../structLabyrinth__cell.html#a14d75b2ba02ea1d4d160d9651892f17c',1,'Labyrinth_cell::column()'],['../structMonster.html#a8ff0e49f3788afb22447257daa962356',1,'Monster::column()']]],
+  ['compare_5fscores_15',['compare_scores',['../leaderboard_8h.html#a702a7c30f3c411c9fdec22a6f9049b4d',1,'leaderboard.h']]],
+  ['copy_5flabyrinth_16',['copy_labyrinth',['../labyrinth__creation_8h.html#a058a4e31c35ea439fe0c9f401ec91a8c',1,'labyrinth_creation.h']]],
+  ['create_5fand_5fsave_17',['create_and_save',['../game_8h.html#af3037570d5a9143a4181218b9d610b4a',1,'game.h']]],
+  ['create_5fghost_18',['create_ghost',['../monster_8h.html#af64cd6ede623c9e50d49a846ca218646',1,'monster.h']]],
+  ['create_5flabyrinth_5fpath_19',['create_labyrinth_path',['../labyrinth__creation_8h.html#a1ec39ad69dea4a40ffa05890e67956fa',1,'labyrinth_creation.h']]],
+  ['create_5fmonster_20',['create_monster',['../monster_8h.html#a1be6017366826dbf1f1d7047879f784d',1,'monster.h']]],
+  ['create_5frecursive_5flabyrinth_5fpath_21',['create_recursive_labyrinth_path',['../labyrinth__creation_8h.html#a56e5e940b8689433640ff670f9168fdd',1,'labyrinth_creation.h']]],
+  ['create_5ftroll_22',['create_troll',['../monster_8h.html#ace86c83668fe9ed916a15bc03f85c145',1,'monster.h']]],
+  ['current_5fcolumn_23',['current_column',['../structMonster.html#a7c8d0bb00c8b48f35d372f5a8b6e09c7',1,'Monster']]],
+  ['current_5frow_24',['current_row',['../structMonster.html#aa2d2230419916c55cc1419cff98d8598',1,'Monster']]]
 ];

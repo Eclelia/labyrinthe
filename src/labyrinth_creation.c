@@ -46,28 +46,28 @@ void create_labyrinth_path(Labyrinth* labyrinth){
         pull_breakable_wall(*labyrinth, &random_row, &random_column);
 
         int neighbours[4] = {
-                    get_cell(*labyrinth, random_row, random_column -1),     //left
-                    get_cell(*labyrinth, random_row, random_column +1),     //right
-                    get_cell(*labyrinth, random_row +1, random_column),     //top
-                    get_cell(*labyrinth, random_row -1, random_column)      //bottom
+                    get_cell(*labyrinth, random_row, random_column -1),     //left cell
+                    get_cell(*labyrinth, random_row, random_column +1),     //right cell
+                    get_cell(*labyrinth, random_row +1, random_column),     //top cell
+                    get_cell(*labyrinth, random_row -1, random_column)      //bottom cell
         };
 
-        if(neighbours[0] == 0){ /*check if left cell is a wall*/
-            if(neighbours[2] != neighbours[3]){ /*are top and bottom the same room*/
+        if(neighbours[0] == 0){ //check if left cell is a wall
+            if(neighbours[2] != neighbours[3]){ //are top and bottom the same room ?
                 set_cell(labyrinth, random_row, random_column, neighbours[2]);
                 unify_room_number(labyrinth, neighbours[2], neighbours[3]); 
                 walls_to_break -= 1;
             }
         }
         else {
-            if(neighbours[0] != neighbours[1]){ /*are left and right the same room*/
+            if(neighbours[0] != neighbours[1]){ //are left and right the same room ?
                 set_cell(labyrinth, random_row, random_column, neighbours[0]);
                 unify_room_number(labyrinth, neighbours[0], neighbours[1]); 
                 walls_to_break -= 1;
             }
         }
     }
-    /*add door and exit*/
+    //add door and exit
     make_labyrinth_playable(labyrinth);
 }
 
@@ -140,9 +140,9 @@ void create_recursive_labyrinth_path(Labyrinth* labyrinth, int current_row, int 
     for(int direction = 0; direction< nb_of_neigbours; direction++){
         int direction_value = get_cell(*labyrinth, neighbours[direction].row, neighbours[direction].column);
         if(direction_value != cell_value){
-            //set la value de la cellule à cell value
+            //set new cell to cell value
             set_cell(labyrinth, neighbours[direction].row, neighbours[direction].column, cell_value);
-            //set mur a cell value
+            //set wall to cell value
             int wall_row = (neighbours[direction].row + current_row)/2;
             int wall_column = (neighbours[direction].column + current_column)/2;
             set_cell(labyrinth, wall_row, wall_column, cell_value);
@@ -151,15 +151,13 @@ void create_recursive_labyrinth_path(Labyrinth* labyrinth, int current_row, int 
                 display_game_with_player(*labyrinth, wall_column, wall_row, 1);
             }
 
-            //donner la nouvelle case à cell_value
+            //recursivity on the new cell
             create_recursive_labyrinth_path(labyrinth, neighbours[direction].row, neighbours[direction].column);
         }
     }
     return; 
 }
 
-
-//Fisher-Yates algorithm
 void shuffle_neighbours(Lab_cell* neighbours, int size) {
     for (int i = size - 1; i > 0; i--) {
         int j = rand() % (i + 1);
@@ -202,7 +200,8 @@ void pull_random_cell(Labyrinth lab, int* random_row, int* random_column){
 
 void pull_random_empty_cell(Labyrinth lab, int* random_row, int* random_column){
     do{
-        *random_row = (rand() % ((lab.longueur - 1)/2)) *2 +1; //TODO changer la formule pour que ça soit n'imp quelle cellule ou dire que fait exprès pour rapidité
+        //for faster search, only considers cells that are not wall
+        *random_row = (rand() % ((lab.longueur - 1)/2)) *2 +1;
         *random_column = (rand() % ((lab.largeur - 1)/2)) *2 +1;
     }while(get_cell(lab, *random_row, *random_column) < WALL);
 }
