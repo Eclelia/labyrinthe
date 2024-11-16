@@ -105,7 +105,7 @@ int move_ghost(Labyrinth* lab, Monster* monster) {
 }
 
 //it's possible that a troll doesn't move
-int move_troll( Labyrinth* lab, Monster* monster) { //TODO : l'empecher de trop s'éloigner du bonus
+int move_troll( Labyrinth* lab, Monster* monster) {
     int d_column, d_row;
     choose_direction(&d_row, &d_column);
 
@@ -114,13 +114,17 @@ int move_troll( Labyrinth* lab, Monster* monster) { //TODO : l'empecher de trop 
 
     int next_cell = get_cell(*lab, next_row, next_column);
     if (next_cell != UNDEFINED && next_cell != WALL && next_cell != EXIT && next_cell != CLOSED_EXIT && next_cell != ENTRY) { //can move
-        monster->current_row = next_row;
-        monster->current_column = next_column;
+        if(distance_from_spawn(*monster, next_row, next_column) < MAX_DISTANCE_FROM_SPAWN){
+            monster->current_row = next_row;
+            monster->current_column = next_column;
+        }
     }
     return TROLL;
 }
 
-//TODO "distance_from_spawn"
+int distance_from_spawn(Monster monster, int next_row, int next_column) {
+    return abs(monster.row - next_row) + abs(monster.column - next_column);
+}
 
 void destroy_monster(Monster* monster) {
     free(monster);

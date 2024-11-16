@@ -18,6 +18,11 @@
  * @brief Calculates the number of trolls based on the number of bonus cells.
  */
 #define RATIO_TROLL(nb_bonuses) (nb_bonuses/3) 
+/**  
+ * @def MAX_DISTANCE_FROM_SPAWN
+ * @brief restricts troll movement : they can't go too far from their spawn.
+ */
+#define MAX_DISTANCE_FROM_SPAWN 6
 
 /**
  * @enum Penality
@@ -181,6 +186,20 @@ int move_ghost(Labyrinth* lab, Monster* monster);
  * @return The type of monster (TROLL).
  */
 int move_troll(Labyrinth* lab, Monster* monster);
+
+/**
+ * @brief Calculates the Manhattan distance from the monster's spawn location to a given cell in the labyrinth.
+ * 
+ * The spawn location is defined by the `row` and `column` attributes of the Monster struct.
+ * This function calculates the absolute difference in rows and columns between the 
+ * spawn point and the target location `(next_row, next_column)`.
+ * 
+ * @param monster A Monster whose spawn location is used for the calculation.
+ * @param next_row The row index of the target cell.
+ * @param next_column The column index of the target cell.
+ * @return int The Manhattan distance between the spawn location and the target cell.
+ */
+int distance_from_spawn(Monster monster, int next_row, int next_column);
 
 /**
  * @brief Destroys a monster and frees allocated memory.
